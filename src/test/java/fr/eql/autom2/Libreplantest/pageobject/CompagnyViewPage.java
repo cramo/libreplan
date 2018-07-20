@@ -10,13 +10,13 @@ public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 	
 	public CompagnyViewPage(WebDriver driver) {
 		super(driver);
-		getIdGenerated();
+		this.idGenerated = getIdGenerated();
 	}
 	
 	public String getIdGenerated() {
 		WebElement web = driver.findElement(By.xpath("//div[1]"));
 		String id = web.getAttribute("id");
-		id.substring(0, 3);
+		id = id.substring(0, 4);
 		return id;
 	}
 	

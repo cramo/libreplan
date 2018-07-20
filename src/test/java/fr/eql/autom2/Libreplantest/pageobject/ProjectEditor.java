@@ -2,6 +2,7 @@ package fr.eql.autom2.Libreplantest.pageobject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class ProjectEditor implements IProjectEditor {
 	@FindBy(xpath = "//*[contains(@id,'p3-real')]")
@@ -24,13 +25,13 @@ public class ProjectEditor implements IProjectEditor {
 
 	@FindBy(xpath = "//*[contains(@id,'k9-real')]")
 	private WebElement dateboxBegin;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'k9-btn')]")
 	private WebElement btnDateboxBegin;
 
 	@FindBy(xpath = "//*[contains(@id,'n9-real')]")
 	private WebElement dateboxDeadline;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'n9-btn')]")
 	private WebElement btnDateboxDeadline;
 
@@ -49,35 +50,43 @@ public class ProjectEditor implements IProjectEditor {
 	@FindBy(xpath = "//*[contains(@id,'string')]")
 	private WebElement btnCancel;
 
-	public void setInputName(String str) {
+	public void setInputName(String name) {
 		this.inputName.clear();
-		this.inputName.sendKeys(str);
+		this.inputName.sendKeys(name);
 	}
 
-	public void setInputModel(String str) {
+	public void setInputModel(String model) {
 		this.inputName.clear();
-		this.inputName.sendKeys(str);
+		this.inputName.sendKeys(model);
 	}
 
-	public void setInputCode(String str) {
+	public void setInputCode(String code) {
 		this.inputName.clear();
-		this.inputName.sendKeys(str);
+		this.inputName.sendKeys(code);
 	}
 
-	public WebElement getCheckboxCodeGenerate() {
-		return checkboxCodeGenerate;
+	public boolean getCheckboxCodeGenerate() {
+		return this.checkboxCodeGenerate.isSelected();
 	}
 
-	public void setCheckboxCodeGenerate(WebElement checkboxCodeGenerate) {
-		this.checkboxCodeGenerate = checkboxCodeGenerate;
+	public void setCheckboxCodeGenerate(State state) {
+		if (state == State.ON) {
+			if (!this.checkboxCodeGenerate.isEnabled())
+				this.checkboxCodeGenerate.click();
+		} else if (state == State.OFF) {
+			if (this.checkboxCodeGenerate.isEnabled())
+				this.checkboxCodeGenerate.click();
+		}
 	}
 
-	public void setDateboxBegin(WebElement dateboxBegin) {
-		this.dateboxBegin = dateboxBegin;
+	public void setDateboxBegin(String begin) {
+		this.inputName.clear();
+		this.inputName.sendKeys(begin);
 	}
 
-	public void setDateboxDeadline(WebElement dateboxDeadline) {
-		this.dateboxDeadline = dateboxDeadline;
+	public void setDateboxDeadline(String deadline) {
+		this.inputName.clear();
+		this.inputName.sendKeys(deadline);
 	}
 
 	public void setInputClient(String str) {
@@ -85,19 +94,24 @@ public class ProjectEditor implements IProjectEditor {
 		this.inputName.sendKeys(str);
 	}
 
-	public void setSelectCalendar(WebElement selectCalendar) {
-		this.selectCalendar = selectCalendar;
+	public void setSelectCalendar(String value) {
+		Select s = new Select(this.selectCalendar);
+		s.selectByValue(value);
+	}
+	
+	public Select getSelectCalendar(){
+		Select s = new Select(this.selectCalendar);
+		return s;
 	}
 
 	public ProjectEditor() {
-
 	}
-	
+
 	public void clickCreateProject() {
 		btnCreateProject.click();
 	}
 
-	public void createProject() {	
+	public void createProject() {
 
 	}
 
