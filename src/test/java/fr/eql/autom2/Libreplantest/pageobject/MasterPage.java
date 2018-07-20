@@ -18,37 +18,87 @@ public class MasterPage {
 
 	Actions actions;
 
-	// Bouton Déconnexion
-	@FindBy(how = How.XPATH, using="/html/body/div[1]/div/div[1]/div[1]/div[1]/div/div/div/table/tbody/tr/td[3]/a")
-	public WebElement btnDeconnexion;	
+	/**************************************
+	 ******** Bouton déconnexion***********
+	 *************************************/
+	@FindBy(xpath="//div[@class='user-area']/descendant::a")
+	protected WebElement btnDeconnexion;	
 
-	// Onglet CALENDRIER
-	@FindBy(how = How.XPATH, using="/html/body/div[1]/div/div[1]/div[1]/div[1]/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[1]/table/tbody/tr/td[1]/table/tbody/tr/td[2]/div")
-	public WebElement ongletCalendrier;	
+	/**************************************
+	 * ******* Menu principal *************
+	 *************************************/
+	////////////////////////////////////////
+	//////// Onglet CALENDRIER/////////////
+	////////////////////////////////////////
+	@FindBy(xpath="(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[1]/descendant::button)[1]")
+	private WebElement ongletCalendrier;	
+	/**
+	 * sousmenu de CALENDRIER
+	 */
+	//----- Vue de la compagnie -----
+	@FindBy(xpath="//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[1]/descendant::div[@class='submenu z-menu-popup']/ul/li[1]/descendant::a")
+	private WebElement sousmenuVueDeLaCompagnie;
+	
+	////////////////////////////////////////
+	//////// Onglet RESSOURCES/////////////
+	////////////////////////////////////////
+	@FindBy(xpath="(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[2]/descendant::button)[1]")
+	private WebElement ongletRessources;	
+	/**
+	 * sousmenu de RESSOURCES
+	 */
+	//-----Participants-----
+	@FindBy(xpath="//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[2]/descendant::div[@class='submenu z-menu-popup']/ul/li[1]/descendant::a")
+	private WebElement sousmenuParticipants;
+	//-----Calendriers------
+	@FindBy(xpath="//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[2]/descendant::div[@class='submenu z-menu-popup']/ul/li[4]/descendant::a")
+	private WebElement sousmenuCalendriers;
+	//-----Critères-----
+	@FindBy(xpath="//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[2]/descendant::div[@class='submenu z-menu-popup']/ul/li[6]/descendant::a")
+	private WebElement sousmenuCriteres;
+	//-----Types d'avancement-----
+	@FindBy(xpath="//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[2]/descendant::div[@class='submenu z-menu-popup']/ul/li[7]/descendant::a")
+	private WebElement sousmenuTypesDAvancement;
+	
+	
+	////////////////////////////////////////
+	////////////// Onlget COUT /////////////
+	////////////////////////////////////////
+	@FindBy(xpath="(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[3]/descendant::button)[1]")
+	private WebElement ongletCout;	
 
-	// Onglet RESSOURCES
-	@FindBy(id="tFyPr-b")
-	public WebElement ongletRessources;	
+	
+	////////////////////////////////////////
+	//////// Onlget CONFIGURATION///////////
+	////////////////////////////////////////
+	@FindBy(xpath="(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[4]/descendant::button)[1]")
+	private WebElement ongletConfiguration;
+	/**
+	 * sousmenu de CONFIGURATION
+	 */
+	//-----Profils-----
+	@FindBy(xpath="//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[4]/descendant::div[@class='submenu z-menu-popup']/ul/li[3]/descendant::a")
+	private WebElement sousmenuProfils;
+	
+		
+	////////////////////////////////////////
+	////////Onglet COMMUNICATIONS //////////
+	////////////////////////////////////////
+	@FindBy(xpath="(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[5]/descendant::button)[1]")
+	private WebElement ongletCommunications;	
 
-	// Onlget COUT
-	@FindBy(id="tFyPp0-b")
-	public WebElement ongletCout;	
+	
+	////////////////////////////////////////
+	////////// Onglet RAPPORTS /////////////
+	////////////////////////////////////////
+	@FindBy(xpath="(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[6]/descendant::button)[1]")
+	private WebElement ongletRapports;	
 
-	// Onlget CONFIGURATION
-	@FindBy(id="tFyP81-b")
-	public WebElement ongletConfiguration;	
-
-	// Onglet COMMUNICATIONS
-	@FindBy(id="tFyPm1-b")
-	public WebElement ongletCommunications;	
-
-	// Onglet RAPPORTS
-	@FindBy(id="tFyP22-b")
-	public WebElement ongletRapports;	
-
-	// Onglet ZONE PERSONNELLE
-	@FindBy(id="tFyPv2-b")
-	public WebElement ongletZonePersonnelle;
+	////////////////////////////////////////
+	/////// Onglet ZONE PERSONNELLE ////////
+	////////////////////////////////////////
+	@FindBy(xpath="(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[7]/descendant::button)[1]")
+	private WebElement ongletZonePersonnelle;
 
 
 	// Constructeur
@@ -69,5 +119,51 @@ public class MasterPage {
 	public void waitAction(WebElement webElement) {
 		this.wait.until(ExpectedConditions.visibilityOf(webElement)); 
 	}
+	
+	/**
+	 * Redirections Pages
+	 */ 
+	
+	public ParticipantsPage goToParticipantsPage() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ongletRessources)
+				.moveToElement(sousmenuParticipants)
+				.click()
+				.build()
+				.perform();
+		return PageFactory.initElements(driver, ParticipantsPage.class);
+	}
+	
+	public CalendriersPage goToCalendriersPage() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ongletRessources)
+				.moveToElement(sousmenuCalendriers)
+				.click()
+				.build()
+				.perform();
+		return PageFactory.initElements(driver, CalendriersPage.class);
+	}
+	
+//	public ProfilsPage goToProfilsPage() {
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(ongletConfiguration)
+//				.moveToElement(sousmenuProfils)
+//				.click()
+//				.build()
+//				.perform();
+//		return PageFactory.initElements(driver, ProfilsPage.class);
+//	}
+	
+	public TypesDAvancementPage goToTypeDAvancementPage() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ongletRessources)
+				.moveToElement(sousmenuTypesDAvancement)
+				.click()
+				.build()
+				.perform();
+		return PageFactory.initElements(driver, TypesDAvancementPage.class);
+	}
+	
+	
 
 }

@@ -45,24 +45,29 @@ public class LoginPage {
 		{
 			// Attend 10s qu'il s'affiche
 			this.txtUsername = wait.until(ExpectedConditions.elementToBeClickable(By.id("txtUsername")));
-		} 
-
-		// Rempli les champs username et password
-		this.txtUsername.sendKeys(txtUsername);
-		this.txtPassword.sendKeys(txtPassword);
+			this.txtUsername.sendKeys(txtUsername);
+			this.txtPassword.sendKeys(txtPassword);
+		} else {
+			// Nettoyer ce qui déjà dans les champs
+			this.txtUsername.clear();
+			this.txtPassword.clear();
+			// Rempli les champs username et password
+			this.txtUsername.sendKeys(txtUsername);
+			this.txtPassword.sendKeys(txtPassword);
+		}
 	}
 
 	/**
 	 * Méthode permettant de cliquer sur login
 	 */
-	public HomePage cliquerLogin() {
+	public CompagnyView cliquerLogin() {
 		// Vérifie si le bouton est visible
 		verif = btnLogin.isDisplayed();
 
 		// Condition vérifiant si le bouton est affiché
 		if(verif == true) btnLogin.click();
 		
-		return  PageFactory.initElements(driver, HomePage.class);
+		return  PageFactory.initElements(driver, CompagnyView.class);
 	}
 
 
