@@ -50,20 +50,19 @@ public class CreerCalendriePage extends MasterPage
 	/**
 	 * Méthodes
 	 */
-	public CalendriersPage fillInNameOfCalendarWithTest1() {
-		String nom = "Test 1";
+	public CalendriersPage fillInNameOfCalendar(String nom) {
 		inputNom.sendKeys(nom);
 		boutonEnregistrer.click();
 		return PageFactory.initElements(driver, CalendriersPage.class);
 	}
 	
-	public CalendriersPage clicButtonEnregistrerEtContinuer() {
+	public CalendriersPage filleInCalendrieDeriveIncorrectly(String nom) {
+		inputNom.sendKeys(nom);
 		boutonEnregistrerEtContinuer.click();
 		return PageFactory.initElements(driver, CalendriersPage.class);
 	}
 	
-	public CalendriersPage filleInCalendrieDeriveCorrectly() {
-		String nom = "Test Calendrier Dérivé";
+	public CalendriersPage filleInCalendrieDeriveCorrectly(String nom) {
 		inputNom.clear();
 		inputNom.sendKeys(nom);
 		boutonEnregistrerEtContinuer.click();
@@ -75,8 +74,12 @@ public class CreerCalendriePage extends MasterPage
 		return PageFactory.initElements(driver, CalendriersPage.class);
 	}
 	
-	public CalendriersPage createCalendrieCopyCorrectly() {
-		String nom = "Test 2";
+	public CalendriersPage createCalendrieCopyIncorrectly() {
+		boutonEnregistrer.click();
+		return PageFactory.initElements(driver, CalendriersPage.class);
+	}
+	
+	public CalendriersPage createCalendrieCopyCorrectly(String nom) {
 		inputNom.clear();
 		inputNom.sendKeys(nom);
 		boutonEnregistrer.click();
