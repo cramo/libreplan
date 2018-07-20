@@ -56,7 +56,7 @@ public class LoginPage {
 	 * Méthode permettant de cliquer sur login
 	 */
 	public HomePage cliquerLogin() {
-		// Initialise la variable btnLogin
+		// Vérifie si le bouton est visible
 		verif = btnLogin.isDisplayed();
 
 		// Condition vérifiant si le bouton est affiché
