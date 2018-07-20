@@ -1,5 +1,7 @@
 package fr.eql.autom2.Libreplantest.pageobject;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,7 +46,7 @@ public class CreerCalendriePage extends MasterPage
 	
 	public CreerCalendriePage(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	/**
