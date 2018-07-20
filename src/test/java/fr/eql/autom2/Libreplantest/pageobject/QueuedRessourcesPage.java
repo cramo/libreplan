@@ -2,8 +2,8 @@ package fr.eql.autom2.Libreplantest.pageobject;
 
 import org.openqa.selenium.WebDriver;
 
-public class Project extends MasterPage implements IProjectEditor {
-	public Project(WebDriver driver) {
+public class QueuedRessourcesPage extends MasterPage implements IProjectEditor{
+	public QueuedRessourcesPage(WebDriver driver) {
 		super(driver);
 	}
 

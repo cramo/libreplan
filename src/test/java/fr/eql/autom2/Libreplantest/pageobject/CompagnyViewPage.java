@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CompagnyView extends MasterPage implements IProjectEditor{
+public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 	public String idGenerated;
 	
-	public CompagnyView(WebDriver driver) {
+	public CompagnyViewPage(WebDriver driver) {
 		super(driver);
 		getIdGenerated();
 	}
