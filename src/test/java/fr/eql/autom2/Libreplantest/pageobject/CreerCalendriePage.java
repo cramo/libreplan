@@ -1,5 +1,7 @@
 package fr.eql.autom2.Libreplantest.pageobject;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,26 +46,25 @@ public class CreerCalendriePage extends MasterPage
 	
 	public CreerCalendriePage(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	/**
 	 * Méthodes
 	 */
-	public CalendriersPage fillInNameOfCalendarWithTest1() {
-		String nom = "Test 1";
+	public CalendriersPage fillInNameOfCalendar(String nom) {
 		inputNom.sendKeys(nom);
 		boutonEnregistrer.click();
 		return PageFactory.initElements(driver, CalendriersPage.class);
 	}
 	
-	public CalendriersPage clicButtonEnregistrerEtContinuer() {
+	public CalendriersPage filleInCalendrieDeriveIncorrectly(String nom) {
+		inputNom.sendKeys(nom);
 		boutonEnregistrerEtContinuer.click();
 		return PageFactory.initElements(driver, CalendriersPage.class);
 	}
 	
-	public CalendriersPage filleInCalendrieDeriveCorrectly() {
-		String nom = "Test Calendrier Dérivé";
+	public CalendriersPage filleInCalendrieDeriveCorrectly(String nom) {
 		inputNom.clear();
 		inputNom.sendKeys(nom);
 		boutonEnregistrerEtContinuer.click();
@@ -75,8 +76,12 @@ public class CreerCalendriePage extends MasterPage
 		return PageFactory.initElements(driver, CalendriersPage.class);
 	}
 	
-	public CalendriersPage createCalendrieCopyCorrectly() {
-		String nom = "Test 2";
+	public CalendriersPage createCalendrieCopyIncorrectly() {
+		boutonEnregistrer.click();
+		return PageFactory.initElements(driver, CalendriersPage.class);
+	}
+	
+	public CalendriersPage createCalendrieCopyCorrectly(String nom) {
 		inputNom.clear();
 		inputNom.sendKeys(nom);
 		boutonEnregistrer.click();
