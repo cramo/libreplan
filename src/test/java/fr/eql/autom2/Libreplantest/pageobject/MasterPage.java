@@ -144,15 +144,18 @@ public class MasterPage {
 		return PageFactory.initElements(driver, CalendriersPage.class);
 	}
 	
-//	public ProfilsPage goToProfilsPage() {
-//		Actions actions = new Actions(driver);
-//		actions.moveToElement(ongletConfiguration)
-//				.moveToElement(sousmenuProfils)
-//				.click()
-//				.build()
-//				.perform();
-//		return PageFactory.initElements(driver, ProfilsPage.class);
-//	}
+	public ProfilsPage goToProfilsPage() {
+		String ID = driver.findElement(By.xpath("//body/div")).getAttribute("id");
+		ID = ID.substring(0, 4);
+		System.out.println(ID);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ongletConfiguration)
+				.moveToElement(sousmenuProfils)
+				.click()
+				.build()
+				.perform();
+		return PageFactory.initElements(driver, ProfilsPage.class);
+	}
 	
 	public TypesDAvancementPage goToTypeDAvancementPage() {
 		Actions actions = new Actions(driver);

@@ -30,6 +30,9 @@ public class CreateProfilPage extends MasterPage {
 	@FindBy(how = How.CLASS_NAME, using="z-button-cm")
 	private WebElement btnAddRole;
 	
+	@FindBy(how=How.XPATH, using="icono z-button")
+	private WebElement titleIcone;
+	
 	public boolean assertTitleCreateProfilPage() {
 		boolean assertResult = this.titleCreatePage.isDisplayed();
 		return assertResult;
@@ -93,6 +96,10 @@ public class CreateProfilPage extends MasterPage {
 		}
 		
 		throw new InvalidArgumentException("Ligne trouvée = " +numeroLigne);
+	}
+	
+	public void assertDeleteBtnBubbleInfos() {
+		
 	}
 	
 	
