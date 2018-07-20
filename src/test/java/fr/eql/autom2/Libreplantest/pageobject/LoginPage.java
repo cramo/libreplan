@@ -60,14 +60,14 @@ public class LoginPage {
 	/**
 	 * Méthode permettant de cliquer sur login
 	 */
-	public CompagnyView cliquerLogin() {
+	public CompagnyViewPage cliquerLogin() {
 		// Vérifie si le bouton est visible
 		verif = btnLogin.isDisplayed();
 
 		// Condition vérifiant si le bouton est affiché
 		if(verif == true) btnLogin.click();
 		
-		return  PageFactory.initElements(driver, CompagnyView.class);
+		return  PageFactory.initElements(driver, CompagnyViewPage.class);
 	}
 
 
