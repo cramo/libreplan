@@ -8,17 +8,17 @@ public class QueuedRessourcesPage extends MasterPage implements IProjectEditor{
 	}
 
 	public void createProject() {
-		ProjectEditor projectEditor = new ProjectEditor();
+		ProjectEditor projectEditor = new ProjectEditor(driver);
 		projectEditor.createProject();
 	}
 
 	public void saveProject() {
-		ProjectEditor projectEditor = new ProjectEditor();
+		ProjectEditor projectEditor = new ProjectEditor(driver);
 		projectEditor.saveProject();
 	}
 
 	public void cancelEdition() {
-		ProjectEditor projectEditor = new ProjectEditor();
+		ProjectEditor projectEditor = new ProjectEditor(driver);
 		projectEditor.cancelEdition();
 	}
 }

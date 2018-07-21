@@ -4,13 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CompagnyViewPage extends MasterPage implements IProjectEditor{
-	public String idGenerated;
+
+	private String idGenerated;
+
+	private ProjectEditor projectEditor;// = PageFactory.initElements(driver, ProjectEditor.class);
 	
 	public CompagnyViewPage(WebDriver driver) {
 		super(driver);
 		this.idGenerated = getIdGenerated();
+		projectEditor = PageFactory.initElements(driver, ProjectEditor.class);
 	}
 	
 	public String getIdGenerated() {
@@ -21,21 +26,23 @@ public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 	}
 	
 	public void displayId() {
-		System.out.println("ID =" +getIdGenerated());
+		System.out.println("ID = " +getIdGenerated());
 	}
-	
+
+	public void clickCreateProject(){
+		projectEditor.clickCreateProject();
+	}
+
 	public void createProject() {
-		ProjectEditor projectEditor = new ProjectEditor();
+
 		projectEditor.createProject();		
 	}
 
 	public void saveProject() {
-		ProjectEditor projectEditor = new ProjectEditor();
 		projectEditor.saveProject();
 	}
 
 	public void cancelEdition() {
-		ProjectEditor projectEditor = new ProjectEditor();
 		projectEditor.cancelEdition();
 	}	
 }
