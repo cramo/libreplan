@@ -34,7 +34,6 @@ public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 	}
 
 	public void createProject() {
-
 		projectEditor.createProject();		
 	}
 
