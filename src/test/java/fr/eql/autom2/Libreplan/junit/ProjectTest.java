@@ -25,6 +25,8 @@ public class ProjectTest {
     private final String calendarXPath = "//*[substring(@id, string-length(@id) - string-length('7-b') +1) = '7-b']";//7-b
     private CompagnyViewPage compagnyViewPage;
     private ProjectEditor projectEditor;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private LocalDateTime time = LocalDateTime.now();
 
     @Before
     public void beforeTest() {
@@ -63,8 +65,8 @@ public class ProjectTest {
         projectEditor = compagnyViewPage.clickCreateProject();
         createNewProjectElementsArePresent();
         //3ieme pas
-        projectEditor.setInputName("test");
-
+        fillingCreateProjectObject();
+        projectEditor.getBtnAccept().click();
     }
 
     private void calendarIsDisplayed() {
@@ -84,11 +86,7 @@ public class ProjectTest {
         assertEquals(true, projectEditor.getCheckboxCodeGenerate().isDisplayed());
         assertEquals(true, projectEditor.getCheckboxCodeGenerate().isSelected());
         assertEquals(true, projectEditor.getDateboxBegin().isDisplayed());
-        //date
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        LocalDateTime now = LocalDateTime.now();
-        //System.out.println(dtf.format(now));
-        assertEquals(dtf.format(now), projectEditor.getDateboxBegin().getAttribute("value"));
+        assertEquals(dtf.format(time), projectEditor.getDateboxBegin().getAttribute("value"));
         assertEquals(true, projectEditor.getBtnDateboxBegin().isDisplayed());
         assertEquals(true, projectEditor.getDateboxDeadline().isDisplayed());
         assertEquals("", projectEditor.getDateboxDeadline().getText());
@@ -100,10 +98,23 @@ public class ProjectTest {
         assertEquals(true, projectEditor.getBtnAccept().isDisplayed());
         assertEquals(true, projectEditor.getBtnCancel().isDisplayed());
     }
+    
+	private void fillingCreateProjectObject() {
+		projectEditor.setInputName("PROJET_TEST1");
+        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getCheckboxCodeGenerateXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getCheckboxCodeGenerateXPath()))));
+        projectEditor.setCheckboxCodeGenerate(State.OFF);
+        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getInputCodeXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getInputCodeXPath()))));
+        projectEditor.setInputCode("PRJTEST001");
+        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxBeginXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxBeginXPath()))));
+        projectEditor.setDateboxBegin(dtf.format(time.plusDays(5)));
+        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxDeadlineXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxDeadlineXPath()))));
+        projectEditor.setDateboxDeadline(dtf.format(time.plusDays(15)));
+	}
 
     @After
-    public void afterTest() {
-        //this.driver.quit();
+    public void afterTest() throws InterruptedException {
+    	/*Thread.sleep(2000);
+        this.driver.quit();*/
     }
 }
 
