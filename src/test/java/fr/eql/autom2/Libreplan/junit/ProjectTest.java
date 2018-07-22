@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -72,21 +74,21 @@ public class ProjectTest {
     }
 
     private void createNewProjectElementsArePresent() {
-        //inputname
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getInputNameXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getInputNameXPath()))));
         assertEquals(true, projectEditor.getInputName().isDisplayed());
         assertEquals("", projectEditor.getInputName().getText());
         assertEquals(true, projectEditor.getInputModel().isDisplayed());
         assertEquals("", projectEditor.getInputModel().getText());
         assertEquals(true, projectEditor.getInputCode().isDisplayed());
-        //projectEditor.setCheckboxCodeGenerate(State.OFF);
-        //System.out.println("test = "+projectEditor.getInputCode().getAttribute("value").substring(0, 5));
         assertEquals("ORDER", projectEditor.getInputCode().getAttribute("value").substring(0, 5));
-        //projectEditor.setCheckboxCodeGenerate(State.ON);
         assertEquals(true, projectEditor.getCheckboxCodeGenerate().isDisplayed());
         assertEquals(true, projectEditor.getCheckboxCodeGenerate().isSelected());
         assertEquals(true, projectEditor.getDateboxBegin().isDisplayed());
         //date
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        //System.out.println(dtf.format(now));
+        assertEquals(dtf.format(now), projectEditor.getDateboxBegin().getAttribute("value"));
         assertEquals(true, projectEditor.getBtnDateboxBegin().isDisplayed());
         assertEquals(true, projectEditor.getDateboxDeadline().isDisplayed());
         assertEquals("", projectEditor.getDateboxDeadline().getText());
