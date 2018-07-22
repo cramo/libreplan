@@ -5,32 +5,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 
-	private String idGenerated;
+	private final String btnCreateProjectXPath = "//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']";
+	@FindBy(xpath = btnCreateProjectXPath)
+	private WebElement btnCreateProject;
 
 	private ProjectEditor projectEditor;// = PageFactory.initElements(driver, ProjectEditor.class);
 	
 	public CompagnyViewPage(WebDriver driver) {
 		super(driver);
-		this.idGenerated = getIdGenerated();
 		projectEditor = PageFactory.initElements(driver, ProjectEditor.class);
 	}
-	
-	public String getIdGenerated() {
-		WebElement web = driver.findElement(By.xpath("//div[1]"));
-		String id = web.getAttribute("id");
-		id = id.substring(0, 4);
-		return id;
-	}
-	
-	public void displayId() {
-		System.out.println("ID = " +getIdGenerated());
+
+	public String getBtnCreateProjectXPath() {
+		return btnCreateProjectXPath;
 	}
 
-	public void clickCreateProject(){
-		projectEditor.clickCreateProject();
+	public ProjectEditor clickCreateProject(){
+		wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(btnCreateProjectXPath)), ExpectedConditions.visibilityOfElementLocated(By.xpath(btnCreateProjectXPath))));
+		btnCreateProject.click();
+		return PageFactory.initElements(driver, ProjectEditor.class);
 	}
 
 	public void createProject() {

@@ -1,9 +1,6 @@
 package fr.eql.autom2.Libreplan.junit;
 
-import fr.eql.autom2.Libreplantest.pageobject.CalendriersPage;
-import fr.eql.autom2.Libreplantest.pageobject.CompagnyViewPage;
-import fr.eql.autom2.Libreplantest.pageobject.LoginPage;
-import fr.eql.autom2.Libreplantest.pageobject.MasterPage;
+import fr.eql.autom2.Libreplantest.pageobject.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,16 +21,20 @@ public class ProjectTest {
     private WebDriver driver;
     private CompagnyViewPage compagnyViewPage;
     private WebDriverWait wait;
-    private String calendrierXPath = "//*[substring(@id, string-length(@id) - string-length('7-b') +1) = '7-b']";//7-b
+    private String calendarXPath = "//*[substring(@id, string-length(@id) - string-length('7-b') +1) = '7-b']";//7-b
 
     @Before
     public void beforeTest() {
         //ou mettre les wait until, junit ou classes
         //bonne pratique ou pas de modifier les get set a sa sauce ?
+        //use a builder pour les params ou faire un page object de create un project
+        //entourer le wait d'un if en vérif son boolean et en faisant un else fails() ?
+        //regarder les url des pages pour voir si ce sont des nouvelles pages
         try {
             Runtime.getRuntime().exec("taskkill /F /IM geckodriver.exe");
             Runtime.getRuntime().exec("taskkill /F /IM plugin-container.exe");
             Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
+            Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,12 +50,17 @@ public class ProjectTest {
 
     @Test
     public void firstTest(){
-        //assert sur l'affichage du calendrier
-        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(calendrierXPath)), ExpectedConditions.visibilityOfElementLocated(By.xpath(calendrierXPath))));
-        WebElement calendar = driver.findElement(By.xpath(calendrierXPath));
+        calendarIsDisplayed();
+        ProjectEditor projectEditor = compagnyViewPage.clickCreateProject();
+        projectEditor.setInputName("test");
+
+    }
+
+    //assert sur l'affichage du calendrier
+    private void calendarIsDisplayed() {
+        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(calendarXPath)), ExpectedConditions.visibilityOfElementLocated(By.xpath(calendarXPath))));
+        WebElement calendar = driver.findElement(By.xpath(calendarXPath));
         assertEquals(true, calendar.isDisplayed());
-        compagnyViewPage.clickCreateProject();
-        compagnyViewPage.createProject();
     }
 
     @After

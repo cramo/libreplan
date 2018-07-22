@@ -14,10 +14,11 @@ public class ProjectEditor extends MasterPage implements IProjectEditor {
     //@FindBy(xpath = "[//*[contains(@id, 'p3-real')]")
     //@FindBy(xpath = "//*[contains(@id,'q3-chdex')")
     //@FindBy(xpath = "//tr[2]/td[2]/img")
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']")
-    private WebElement btnCreateProject;
+    /*@FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']")
+    private WebElement btnCreateProject;*/
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']")//p7
+    private final String inputNameXPath = "//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']";
+    @FindBy(xpath = inputNameXPath)//p7
     private WebElement inputName;
 
     @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']")//v7-real
@@ -60,6 +61,7 @@ public class ProjectEditor extends MasterPage implements IProjectEditor {
     private WebElement btnCancel;
 
     public void setInputName(String name) {
+        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(inputNameXPath)), ExpectedConditions.visibilityOfElementLocated(By.xpath(inputNameXPath))));;
         this.inputName.clear();
         this.inputName.sendKeys(name);
     }
@@ -115,16 +117,16 @@ public class ProjectEditor extends MasterPage implements IProjectEditor {
         super(driver);
     }
 
-    public void clickCreateProject() {
+    /*public void clickCreateProject() {
         WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']")));
         WebElement element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']")));
         btnCreateProject.click();
-    }
+    }*/
 
     public void createProject() {
-        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']")));
+        /* element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']")));
         WebElement element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']")));
-        setInputName("test");
+        setInputName("test");*/
         /*WebElement element3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']")));
         WebElement element4 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']")));*/
         /*try {
