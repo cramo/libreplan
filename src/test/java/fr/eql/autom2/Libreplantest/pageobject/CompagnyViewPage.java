@@ -25,7 +25,7 @@ public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 	}
 
 	public ProjectEditor clickCreateProject(){
-		wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(btnCreateProjectXPath)), ExpectedConditions.visibilityOfElementLocated(By.xpath(btnCreateProjectXPath))));
+		//wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(btnCreateProjectXPath)), ExpectedConditions.visibilityOfElementLocated(By.xpath(btnCreateProjectXPath))));
 		btnCreateProject.click();
 		return PageFactory.initElements(driver, ProjectEditor.class);
 	}

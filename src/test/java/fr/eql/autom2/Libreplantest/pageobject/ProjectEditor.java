@@ -9,59 +9,174 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class ProjectEditor extends MasterPage implements IProjectEditor {
-    //@FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('p3-real') +1)]")
-    //*[@id="yHsVq3-box"]/tbody/tr[2]/td[2]/img
-    //@FindBy(xpath = "[//*[contains(@id, 'p3-real')]")
-    //@FindBy(xpath = "//*[contains(@id,'q3-chdex')")
-    //@FindBy(xpath = "//tr[2]/td[2]/img")
-    /*@FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']")
-    private WebElement btnCreateProject;*/
 
     private final String inputNameXPath = "//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']";
     @FindBy(xpath = inputNameXPath)//p7
     private WebElement inputName;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']")//v7-real
+    private final String inputModelXPath = "//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']";//v7-real
+    @FindBy(xpath = inputModelXPath)
     private WebElement inputModel;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('v7-btn') +1) = 'v7-btn']")
+    private final String btnSearchModelXPath = "//*[substring(@id, string-length(@id) - string-length('v7-btn') +1) = 'v7-btn']";
+    @FindBy(xpath = btnSearchModelXPath)
     private WebElement btnSearchModel;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('38') +1) = '38']")
+    private final String inputCodeXPath = "//*[substring(@id, string-length(@id) - string-length('j8') +1) = 'j8']";//38
+    @FindBy(xpath = inputCodeXPath)
     private WebElement inputCode;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']")
+    private final String checkboxCodeGenerateXPath = "//*[substring(@id, string-length(@id) - string-length('k8-real') +1) = 'k8-real']";//48-real
+    @FindBy(xpath = checkboxCodeGenerateXPath)
     private WebElement checkboxCodeGenerate;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('k9-real') +1) = 'k9-real']")
+    private final String dateboxBeginXPath = "//*[substring(@id, string-length(@id) - string-length('n8-real') +1) = 'n8-real']";//k9-real
+    @FindBy(xpath = dateboxBeginXPath)
     private WebElement dateboxBegin;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('k9-btn') +1) = 'k9-btn']")
+    private final String btnDateboxBeginXPath = "//*[substring(@id, string-length(@id) - string-length('n8-btn') +1) = 'n8-btn']";//k9-btn
+    @FindBy(xpath = btnDateboxBeginXPath)
     private WebElement btnDateboxBegin;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('n9-real') +1) = 'n9-real']")
+    private final String dateboxDeadlineXPath = "//*[substring(@id, string-length(@id) - string-length('q8-real') +1) = 'q8-real']";//n9-real
+    @FindBy(xpath = dateboxDeadlineXPath)
     private WebElement dateboxDeadline;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('n9-btn') +1) = 'n9-btn']")
+    private final String btnDateboxDeadlineXPath = "//*[substring(@id, string-length(@id) - string-length('q8-btn') +1) = 'q8-btn']";//n9-btn
+    @FindBy(xpath = btnDateboxDeadlineXPath)
     private WebElement btnDateboxDeadline;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('s9-real') +1) = 's9-real']")
+    private final String inputClientXPath = "//*[substring(@id, string-length(@id) - string-length('v8-real') +1) = 'v8-real']";//s9-real
+    @FindBy(xpath = inputClientXPath)
     private WebElement inputClient;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('s9-btn') +1) = 's9-btn']")
+    private final String btnSearchClientXPath = "//*[substring(@id, string-length(@id) - string-length('v8-btn') +1) = 'v8-btn']";//s9-btn
+    @FindBy(xpath = btnSearchClientXPath)
     private WebElement btnSearchClient;
 
-    @FindBy(xpath = "//*[substring(@id, string-length(@id) - string-length('0a-real') +1) = '0a-real']")
+    private final String selectCalendarXPath = "//*[substring(@id, string-length(@id) - string-length('59-real') +1) = '59-real']";//0a-real
+    @FindBy(xpath = selectCalendarXPath)
     private WebElement selectCalendar;
 
-    @FindBy(xpath = "//*[contains(@id,'string')]")
+    private final String btnAcceptXPath = "//*[substring(@id, string-length(@id) - string-length('79-box') +1) = '79-box']/tbody/tr[2]/td[2]";
+    //*[@id="dHAQ79-box"]/tbody/tr[2]/td[2]
+    @FindBy(xpath = btnAcceptXPath)
     private WebElement btnAccept;
 
-    @FindBy(xpath = "//*[contains(@id,'string')]")
+    private final String btnCancelXPath = "//*[substring(@id, string-length(@id) - string-length('89-box') +1) = '89-box']/tbody/tr[2]/td[2]";
+    //*[@id="dHAQ89-box"]/tbody/tr[2]/td[2]
+    @FindBy(xpath = btnCancelXPath)
     private WebElement btnCancel;
 
+    public WebElement getInputName() {
+        return inputName;
+    }
+
+    public WebElement getInputModel() {
+        return inputModel;
+    }
+
+    public WebElement getBtnSearchModel() {
+        return btnSearchModel;
+    }
+
+    public WebElement getInputCode() {
+        return inputCode;
+    }
+
+    public WebElement getCheckboxCodeGenerate() {
+        return checkboxCodeGenerate;
+    }
+
+    public WebElement getDateboxBegin() {
+        return dateboxBegin;
+    }
+
+    public WebElement getBtnDateboxBegin() {
+        return btnDateboxBegin;
+    }
+
+    public WebElement getDateboxDeadline() {
+        return dateboxDeadline;
+    }
+
+    public WebElement getBtnDateboxDeadline() {
+        return btnDateboxDeadline;
+    }
+
+    public WebElement getInputClient() {
+        return inputClient;
+    }
+
+    public WebElement getBtnSearchClient() {
+        return btnSearchClient;
+    }
+
+    public WebElement getBtnAccept() {
+        return btnAccept;
+    }
+
+    public WebElement getBtnCancel() {
+        return btnCancel;
+    }
+
+    public String getInputNameXPath() {
+        return inputNameXPath;
+    }
+
+    public String getInputModelXPath() {
+        return inputModelXPath;
+    }
+
+    public String getBtnSearchModelXPath() {
+        return btnSearchModelXPath;
+    }
+
+    public String getInputCodeXPath() {
+        return inputCodeXPath;
+    }
+
+    public String getCheckboxCodeGenerateXPath() {
+        return checkboxCodeGenerateXPath;
+    }
+
+    public String getDateboxBeginXPath() {
+        return dateboxBeginXPath;
+    }
+
+    public String getBtnDateboxBeginXPath() {
+        return btnDateboxBeginXPath;
+    }
+
+    public String getDateboxDeadlineXPath() {
+        return dateboxDeadlineXPath;
+    }
+
+    public String getBtnDateboxDeadlineXPath() {
+        return btnDateboxDeadlineXPath;
+    }
+
+    public String getInputClientXPath() {
+        return inputClientXPath;
+    }
+
+    public String getBtnSearchClientXPath() {
+        return btnSearchClientXPath;
+    }
+
+    public String getSelectCalendarXPath() {
+        return selectCalendarXPath;
+    }
+
+    public String getBtnAcceptXPath() {
+        return btnAcceptXPath;
+    }
+
+    public String getBtnCancelXPath() {
+        return btnCancelXPath;
+    }
+
     public void setInputName(String name) {
-        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(inputNameXPath)), ExpectedConditions.visibilityOfElementLocated(By.xpath(inputNameXPath))));;
         this.inputName.clear();
         this.inputName.sendKeys(name);
     }
@@ -74,10 +189,6 @@ public class ProjectEditor extends MasterPage implements IProjectEditor {
     public void setInputCode(String code) {
         this.inputCode.clear();
         this.inputCode.sendKeys(code);
-    }
-
-    public boolean getCheckboxCodeGenerate() {
-        return this.checkboxCodeGenerate.isSelected();
     }
 
     public void setCheckboxCodeGenerate(State state) {
@@ -103,7 +214,7 @@ public class ProjectEditor extends MasterPage implements IProjectEditor {
         this.inputClient.sendKeys(str);
     }
 
-    public void setSelectCalendar(String value) {
+    /*public void setSelectCalendar(String value) {
         Select s = new Select(this.selectCalendar);
         s.selectByValue(value);
     }
@@ -111,17 +222,15 @@ public class ProjectEditor extends MasterPage implements IProjectEditor {
     public Select getSelectCalendar() {
         Select s = new Select(this.selectCalendar);
         return s;
+    }*/
+
+    public WebElement getSelectCalendar(){
+        return selectCalendar;
     }
 
     public ProjectEditor(WebDriver driver) {
         super(driver);
     }
-
-    /*public void clickCreateProject() {
-        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']")));
-        WebElement element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']")));
-        btnCreateProject.click();
-    }*/
 
     public void createProject() {
         /* element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']")));

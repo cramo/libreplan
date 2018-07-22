@@ -19,9 +19,10 @@ import static org.junit.Assert.assertEquals;
 
 public class ProjectTest {
     private WebDriver driver;
-    private CompagnyViewPage compagnyViewPage;
     private WebDriverWait wait;
-    private String calendarXPath = "//*[substring(@id, string-length(@id) - string-length('7-b') +1) = '7-b']";//7-b
+    private final String calendarXPath = "//*[substring(@id, string-length(@id) - string-length('7-b') +1) = '7-b']";//7-b
+    private CompagnyViewPage compagnyViewPage;
+    private ProjectEditor projectEditor;
 
     @Before
     public void beforeTest() {
@@ -30,6 +31,9 @@ public class ProjectTest {
         //use a builder pour les params ou faire un page object de create un project
         //entourer le wait d'un if en vérif son boolean et en faisant un else fails() ?
         //regarder les url des pages pour voir si ce sont des nouvelles pages
+
+        //TODO : Rename classes like the english version of the app
+
         try {
             Runtime.getRuntime().exec("taskkill /F /IM geckodriver.exe");
             Runtime.getRuntime().exec("taskkill /F /IM plugin-container.exe");
@@ -49,18 +53,50 @@ public class ProjectTest {
     }
 
     @Test
-    public void firstTest(){
+    public void firstTest() {
+        //1er pas
         calendarIsDisplayed();
-        ProjectEditor projectEditor = compagnyViewPage.clickCreateProject();
+        //2ieme pas
+        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(compagnyViewPage.getBtnCreateProjectXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(compagnyViewPage.getBtnCreateProjectXPath()))));
+        projectEditor = compagnyViewPage.clickCreateProject();
+        createNewProjectElementsArePresent();
+        //3ieme pas
         projectEditor.setInputName("test");
 
     }
 
-    //assert sur l'affichage du calendrier
     private void calendarIsDisplayed() {
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(calendarXPath)), ExpectedConditions.visibilityOfElementLocated(By.xpath(calendarXPath))));
         WebElement calendar = driver.findElement(By.xpath(calendarXPath));
         assertEquals(true, calendar.isDisplayed());
+    }
+
+    private void createNewProjectElementsArePresent() {
+        //inputname
+        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getInputNameXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getInputNameXPath()))));
+        assertEquals(true, projectEditor.getInputName().isDisplayed());
+        assertEquals("", projectEditor.getInputName().getText());
+        assertEquals(true, projectEditor.getInputModel().isDisplayed());
+        assertEquals("", projectEditor.getInputModel().getText());
+        assertEquals(true, projectEditor.getInputCode().isDisplayed());
+        //projectEditor.setCheckboxCodeGenerate(State.OFF);
+        //System.out.println("test = "+projectEditor.getInputCode().getAttribute("value").substring(0, 5));
+        assertEquals("ORDER", projectEditor.getInputCode().getAttribute("value").substring(0, 5));
+        //projectEditor.setCheckboxCodeGenerate(State.ON);
+        assertEquals(true, projectEditor.getCheckboxCodeGenerate().isDisplayed());
+        assertEquals(true, projectEditor.getCheckboxCodeGenerate().isSelected());
+        assertEquals(true, projectEditor.getDateboxBegin().isDisplayed());
+        //date
+        assertEquals(true, projectEditor.getBtnDateboxBegin().isDisplayed());
+        assertEquals(true, projectEditor.getDateboxDeadline().isDisplayed());
+        assertEquals("", projectEditor.getDateboxDeadline().getText());
+        assertEquals(true, projectEditor.getBtnDateboxDeadline().isDisplayed());
+        assertEquals(true, projectEditor.getInputClient().isDisplayed());
+        assertEquals("", projectEditor.getInputClient().getText());
+        assertEquals(true, projectEditor.getSelectCalendar().isDisplayed());
+        assertEquals("Default", projectEditor.getSelectCalendar().getAttribute("value"));
+        assertEquals(true, projectEditor.getBtnAccept().isDisplayed());
+        assertEquals(true, projectEditor.getBtnCancel().isDisplayed());
     }
 
     @After
