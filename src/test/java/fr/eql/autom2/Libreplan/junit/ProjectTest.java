@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -27,6 +28,7 @@ public class ProjectTest {
     private ProjectEditor projectEditor;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private LocalDateTime time = LocalDateTime.now();
+    private ProjectDetailPage projectDetailPage;
 
     @Before
     public void beforeTest() {
@@ -66,7 +68,9 @@ public class ProjectTest {
         createNewProjectElementsArePresent();
         //3ieme pas
         fillingCreateProjectObject();
-        projectEditor.getBtnAccept().click();
+        projectDetailPage = projectEditor.clickAcceptCreateProject();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableProjectDetailXPath())));
+        assertEquals(true, projectDetailPage.getTableProjectDetail().isDisplayed());
     }
 
     private void calendarIsDisplayed() {
@@ -100,11 +104,13 @@ public class ProjectTest {
     }
     
 	private void fillingCreateProjectObject() {
-		projectEditor.setInputName("PROJET_TEST1");
+		Random rand = new Random();
+		int  n = rand.nextInt(50) + 1;
+		projectEditor.setInputName("PROJET_TEST1" + n);
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getCheckboxCodeGenerateXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getCheckboxCodeGenerateXPath()))));
         projectEditor.setCheckboxCodeGenerate(State.OFF);
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getInputCodeXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getInputCodeXPath()))));
-        projectEditor.setInputCode("PRJTEST001");
+        projectEditor.setInputCode("PRJTEST001" + n);
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxBeginXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxBeginXPath()))));
         projectEditor.setDateboxBegin(dtf.format(time.plusDays(5)));
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxDeadlineXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxDeadlineXPath()))));
