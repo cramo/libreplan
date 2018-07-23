@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ProjectEditor extends MasterPage implements IProjectEditor {
 
-    private final String inputNameXPath = "//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']";
-    @FindBy(xpath = inputNameXPath)//p7
+    private final String inputNameXPath = "//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']";//p7
+    @FindBy(xpath = inputNameXPath)
     private WebElement inputName;
 
     private final String inputModelXPath = "//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']";//v7-real
