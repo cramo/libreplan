@@ -28,21 +28,21 @@ public class CalendriersPage extends MasterPage
 //		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
-	public CreerCalendriePage createCalendrie() {
+	public CreateCalendriePage createCalendrie() {
 		boutonCreer.click(); 
-		return PageFactory.initElements(driver, CreerCalendriePage.class);
+		return PageFactory.initElements(driver, CreateCalendriePage.class);
 	}
 	
-	public CreerCalendriePage createUneDerive(String test) {
+	public CreateCalendriePage createUneDerive(String test) {
 		WebElement iconCreerUneDerive = driver.findElement(By.xpath("(.//span[.//text()[contains(., '"+test+"')]]/../../following-sibling::td[3]/descendant::td[.//img])[1]"));
 		iconCreerUneDerive.click(); 
-		return PageFactory.initElements(driver, CreerCalendriePage.class);
+		return PageFactory.initElements(driver, CreateCalendriePage.class);
 	}
 	
-	public CreerCalendriePage createUneCopieCalendrie(String test) {
+	public CreateCalendriePage createUneCopieCalendrie(String test) {
 		WebElement iconCreerUneCopie = driver.findElement(By.xpath("(.//span[.//text()[contains(., '"+test+"')]]/../../following-sibling::td[3]/descendant::td[.//img])[2]"));
 		iconCreerUneCopie.click();
-		return PageFactory.initElements(driver, CreerCalendriePage.class);
+		return PageFactory.initElements(driver, CreateCalendriePage.class);
 	}
 	
 	public Boolean checkoutTableHeader() {

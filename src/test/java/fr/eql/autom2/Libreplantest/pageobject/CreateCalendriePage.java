@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CreerCalendriePage extends MasterPage
+public class CreateCalendriePage extends MasterPage
 {
 	/**
 	 * Elements communs
@@ -50,7 +50,7 @@ public class CreerCalendriePage extends MasterPage
 	 */
 	
 	
-	public CreerCalendriePage(WebDriver driver) {
+	public CreateCalendriePage(WebDriver driver) {
 		super(driver);
 //		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}

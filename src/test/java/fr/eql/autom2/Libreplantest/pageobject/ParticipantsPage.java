@@ -3,16 +3,21 @@ package fr.eql.autom2.Libreplantest.pageobject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class ParticipantsPage extends MasterPage{
 
-	@FindBy()
+	@FindBy(xpath="(.//td[.//text()[contains(., 'Créer')]])[1]")
 	private WebElement boutonCreer;
-	@FindBy()
+	@FindBy(xpath="//table[@class='filtering-area z-hbox']/descendant::span[text()[contains(., 'Filtré par')]]/../following-sibling::td[2]//input")
+	private WebElement inputFiltre;
+	@FindBy(xpath="//table[@class='filtering-area z-hbox']/descendant::span[text()[contains(., 'Filtré par')]]/../following-sibling::td[2]//input/following-sibling::i")
+	private WebElement iconFiltre;
+	@FindBy(xpath="//table[@class='filtering-area z-hbox']/descendant::span[text()[contains(., 'Détails personnels')]]/../following-sibling::td[2]/input")
 	private WebElement inputDetailsPersonnels;
-	@FindBy()
+	@FindBy(xpath="//table[@class='filtering-area z-hbox']/descendant::td[text()[contains(.,'')]]")
 	private WebElement boutonPlusDOptions;
-	@FindBy()
+	@FindBy(xpath="//table[@class='filtering-area z-hbox']/descendant::td[text()[contains(.,'Filtre')]]")
 	private WebElement boutonFiltre;
 	/**
 	 * dans le bloc Plus d'option
@@ -26,6 +31,19 @@ public class ParticipantsPage extends MasterPage{
 	/**
 	 * Tableau participants
 	 */
+	@FindBy(xpath="//tbody//div[text()[contains(.,'Surnom')]]")
+	private WebElement headSurnom;
+	@FindBy(xpath="//tbody//div[text()[contains(.,'Prénom')]]")
+	private WebElement headPrenom;
+	@FindBy(xpath="//tbody//div[text()[contains(.,'ID')]]")
+	private WebElement headId;
+	@FindBy(xpath="//tbody//div[text()[contains(.,'Code')]]")
+	private WebElement headCode;
+	@FindBy(xpath="//tbody//div[text()[contains(.,'En file')]]")
+	private WebElement headEnFile;
+	@FindBy(xpath="//tbody//div[text()[contains(.,'Opération')]]")
+	private WebElement headOperations;
+	// en bas de tableau
 	@FindBy()
 	private WebElement boutonSuivant;
 	@FindBy()
@@ -41,6 +59,30 @@ public class ParticipantsPage extends MasterPage{
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Méthode actions
+	 */
+	public CreateUnParticipantPage createParticipant() {
+		boutonCreer.click();
+		return PageFactory.initElements(driver, CreateUnParticipantPage.class);
+	}
+	
+	/**
+	 * Vérifications
+	 */
+	public Boolean checkoutParticipantsPage() {
+		return headSurnom.isDisplayed()
+				&& headPrenom.isDisplayed()
+				&& headId.isDisplayed()
+				&& headCode.isDisplayed()
+				&& headEnFile.isDisplayed()
+				&& headOperations.isDisplayed()
+				&& inputFiltre.isDisplayed()
+				&& iconFiltre.isDisplayed()
+				&& inputDetailsPersonnels.isDisplayed()
+				&& boutonPlusDOptions.isDisplayed()
+				&& boutonFiltre.isDisplayed()
+				&& boutonCreer.isDisplayed();
+	}
 	
 }

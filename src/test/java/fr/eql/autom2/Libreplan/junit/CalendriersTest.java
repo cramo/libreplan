@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import fr.eql.autom2.Libreplantest.pageobject.CalendriersPage;
-import fr.eql.autom2.Libreplantest.pageobject.CreerCalendriePage;
+import fr.eql.autom2.Libreplantest.pageobject.CreateCalendriePage;
 import fr.eql.autom2.Libreplantest.pageobject.MasterPage;
 /**
  * 
@@ -50,7 +50,7 @@ public class CalendriersTest extends MasterTest{
 				true, calListePage.checkoutTableHeader());
 		
 		// 3 : creer un calendrier
-		CreerCalendriePage cal = calListePage.createCalendrie();
+		CreateCalendriePage cal = calListePage.createCalendrie();
 		WebElement titreCreerCalendrier = driver.findElement(By.xpath("(//span[@class='z-tab-text'])[1]"));
 		waitCalPage.until(ExpectedConditions.visibilityOf(titreCreerCalendrier));
 		assertEquals("vérifier l'onglet 'Données de calendrier' et les 3 boutons sont présents", true, cal.checkoutCreerCalendrier());
