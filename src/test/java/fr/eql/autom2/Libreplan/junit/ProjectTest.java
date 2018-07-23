@@ -153,7 +153,7 @@ public class ProjectTest {
 
 	private void verifyOrderOfVerticalTabs() {
 		List<WebElement> tabs = driver.findElements(By.xpath(
-				"//*[substring(@id, string-length(@id) - string-length('r3') +1) = 'r3']/tbody/tr/td/table/tbody/tr/td/span/table/tbody/tr[2]/td[2]"));
+				"//*[substring(@id, string-length(@id) - string-length('r3') +1) = 'r3']/tbody/tr/td/table/tbody/tr/td/span/table/tbody/tr[2]/td[2]"));//r3 demo r3
 		// System.out.println("lignes = " + tabs.size());
 		List<String> str = new ArrayList<String>();
 		str.add("Planification de projet");
@@ -176,7 +176,7 @@ public class ProjectTest {
 	}
 
 	private void verifyOrderOfHorizontalTabs() {
-		List<WebElement> tabs = driver.findElements(By.xpath("//ul/li/div/div/div[contains(@id, 'v-hm')]/span"));
+		List<WebElement> tabs = driver.findElements(By.xpath("//ul/li/div/div/div[contains(@id, 'v-hm')]/span")); // demo v-hm
 		// ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span
 		// System.out.println("lignes = " + tabs.size());
 		List<String> str = new ArrayList<String>();

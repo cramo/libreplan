@@ -8,12 +8,12 @@ public class ProjectDetailPage extends MasterPage {
 
 	// *[@id="tT7P34-box"]/tbody/tr[2]/td[2]
 	// *[@id="cQ4Q34-box"]/tbody/tr[2]/td[2]
-	private final String tableProjectDetailXPath = "//*[substring(@id, string-length(@id) - string-length('34-box') +1) = '34-box']/tbody/tr[2]/td[2]";
+	private final String tableProjectDetailXPath = "//*[substring(@id, string-length(@id) - string-length('34-box') +1) = '34-box']/tbody/tr[2]/td[2]";//h4-box demo 34-box
 	@FindBy(xpath = tableProjectDetailXPath)
 	private WebElement tableProjectDetail;
 
 	// *[@id="aS6Qfs-hm"]/span
-	private final String spanMenuWBSXPath = "//*[substring(@id, string-length(@id) - string-length('-hm') +1) = '-hm']/span[.=\"WBS (tâches)\"]";
+	private final String spanMenuWBSXPath = "//*[substring(@id, string-length(@id) - string-length('-hm') +1) = '-hm']/span[.=\"WBS (tâches)\"]";//-hm demo -hm
 	@FindBy(xpath = spanMenuWBSXPath)
 	private WebElement spanMenuWBS;
 
