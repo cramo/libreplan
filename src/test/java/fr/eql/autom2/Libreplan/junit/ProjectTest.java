@@ -1,6 +1,7 @@
 package fr.eql.autom2.Libreplan.junit;
 
 import fr.eql.autom2.Libreplantest.pageobject.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +17,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.transform.Result;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class ProjectTest {
     private WebDriver driver;
@@ -33,11 +39,11 @@ public class ProjectTest {
 
     @Before
     public void beforeTest() {
-        //ou mettre les wait until, junit ou classes
-        //bonne pratique ou pas de modifier les get set a sa sauce ?
+        //ou mettre les wait until, junit ou classes > classes
+        //bonne pratique ou pas de modifier les get set a sa sauce ? > nop
         //use a builder pour les params ou faire un page object de create un project
         //entourer le wait d'un if en vÃ©rif son boolean et en faisant un else fails() ?
-        //regarder les url des pages pour voir si ce sont des nouvelles pages
+        //regarder les url des pages pour voir si ce sont des nouvelles pages > bof
 
         //TODO : Rename classes like the english version of the app
 
@@ -64,35 +70,28 @@ public class ProjectTest {
         //1er pas
         calendarIsDisplayed();
         //2ieme pas
-        wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(compagnyViewPage.getBtnCreateProjectXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(compagnyViewPage.getBtnCreateProjectXPath()))));
         projectEditor = compagnyViewPage.clickCreateProject();
         createNewProjectElementsArePresent();
         //3ieme pas
         fillingCreateProjectObject();
         projectDetailPage = projectEditor.clickAcceptCreateProject();
-        //Thread.sleep(5000);
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getSpanMenuWBSXPath())));
-        //wait.until(ExpectedConditions.and(ExpectedConditions.attributeContains(By.xpath(projectDetailPage.getTableProjectDetailXPath()), projectDetailPage.getTableProjectDetail().getText(), "Détail du projet"), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableProjectDetailXPath()))));
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableProjectDetailXPath())));
-        /*boolean result = false;
-        int attempts = 0;
-        while(attempts < 20) {
-            try {
-            	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableProjectDetailXPath())));
-                result = true;
-                break;
-            } catch(StaleElementReferenceException e) {
-            }
-            attempts++;
-        }*/
+        detailProjectPageDisplayed();
+        //4ieme pas
+        verifyOrderOfVerticalTabs();
         
-        //wait.until(ExpectedConditions.attributeToBe(By.xpath(projectDetailPage.getTableProjectDetailXPath()), projectDetailPage.getTableProjectDetail().getAttribute(name), "Détail du projet"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableDashboardXPath())));
-        assertEquals(true, projectDetailPage.getSpanMenuWBS().isDisplayed());
-        assertEquals("WBS (tâches)", projectDetailPage.getSpanMenuWBS().getText());
-        assertEquals(true, projectDetailPage.getTableProjectDetail().isDisplayed());
-        assertEquals("Détail du projet", projectDetailPage.getTableProjectDetail().getText());
-        System.out.println(projectDetailPage.getTableProjectDetail().getText());
+        /*WebElement el = driver.findElement(By.xpath("//ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span"));
+        System.out.println("text =" + el.getText());
+        System.out.println("value =" + el.getCssValue("text"));
+        System.out.println("innerHTML =" + el.getAttribute("innerHTML"));
+        System.out.println("value =" + el.getAttribute("textContent"));*/
+        
+      //*[@id="o60X6v-hm"]/span
+      //*[@id="r43Sav-hm"]/span
+        		//*[@id="yIyVxu-hm"]/span
+        		//*[@id="o60X6v-hm"]/span
+        //5ieme pas
+        verifyOrderOfHorizontalTabs();
+        //6ieme pas
     }
 
     private void calendarIsDisplayed() {
@@ -137,6 +136,66 @@ public class ProjectTest {
         projectEditor.setDateboxBegin(dtf.format(time.plusDays(5)));
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxDeadlineXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxDeadlineXPath()))));
         projectEditor.setDateboxDeadline(dtf.format(time.plusDays(15)));	
+	}
+	
+	private void detailProjectPageDisplayed() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableDashboardXPath())));
+        assertEquals(true, projectDetailPage.getSpanMenuWBS().isDisplayed());
+        assertEquals("WBS (tâches)", projectDetailPage.getSpanMenuWBS().getText());
+        assertEquals(true, projectDetailPage.getTableProjectDetail().isDisplayed());
+        assertEquals("Détail du projet", projectDetailPage.getTableProjectDetail().getText());
+	}
+	
+	private void verifyOrderOfVerticalTabs() {
+		List<WebElement> tabs = driver.findElements(By.xpath("//*[substring(@id, string-length(@id) - string-length('r3') +1) = 'r3']/tbody/tr/td/table/tbody/tr/td/span/table/tbody/tr[2]/td[2]"));
+		//System.out.println("lignes = " + tabs.size());
+		List<String> str = new ArrayList<String>();
+		str.add("Planification de projet");
+		str.add("Détail du projet");
+		str.add("Chargement des ressources");
+		str.add("Allocation avancée");
+		str.add("Tableau de bord");
+		str.add("test");
+		int i = 0;
+		for(WebElement tab : tabs){
+			//System.out.println("tab = " + tab.getText());
+			if(tab.getText().equals(str.get(i))){
+				i++;
+				//System.out.println("if = " + i);
+			}
+			//System.out.println("boucle = " + i);
+		}
+		//System.out.println("result = " + i);
+		assertEquals(5, i); 	
+	}
+	
+	private void verifyOrderOfHorizontalTabs() {
+		List<WebElement> tabs = driver.findElements(By.xpath("//ul/li/div/div/div[contains(@id, 'v-hm')]/span"));
+		//ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span
+		//System.out.println("lignes = " + tabs.size());
+		List<String> str = new ArrayList<String>();
+		str.add("WBS (tâches)");
+		str.add("Données générales");
+		str.add("Coût");
+		str.add("Avancement");
+		str.add("Libellés");
+		str.add("Exigence de critère");
+		str.add("Matériels");
+		str.add("Formulaires qualité des tâches");
+		str.add("Autorisation");
+		str.add("kokok");
+		int i = 0;
+		for(WebElement tab : tabs){
+			System.out.println("tab = " + tab.getAttribute("innerHTML"));
+			if(tab.getAttribute("innerHTML").equals(str.get(i))){
+				i++;
+				System.out.println("if = " + i);
+			}
+			System.out.println("boucle = " + i);
+		}
+		System.out.println("result = " + i);
+		assertEquals(9, i); 
+		//*[@id="yIyVxu-hm"]/span
 	}
 
     @After
