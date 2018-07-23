@@ -49,6 +49,31 @@ public class ProjectDetailPage extends MasterPage {
 	@FindBy(xpath = btnCancelImageXPath)
 	private WebElement btnCancelImage;
 	
+	//*[@id="n38Vf4-cap"]
+	private final String divConfirmCancelXPath = "//*[substring(@id, string-length(@id) - string-length('4-cap') +1) = '4-cap']";//4-cap demo 0-cap
+	@FindBy(xpath = divConfirmCancelXPath)
+	private WebElement divConfirmCancel;
+	
+	public String getBtnSaveXPath() {
+		return btnSaveXPath;
+	}
+
+	public String getBtnSaveImageXPath() {
+		return btnSaveImageXPath;
+	}
+
+	public String getBtnCancelImageXPath() {
+		return btnCancelImageXPath;
+	}
+
+	public String getDivConfirmCancelXPath() {
+		return divConfirmCancelXPath;
+	}
+
+	public WebElement getDivConfirmCancel() {
+		return divConfirmCancel;
+	}
+
 	public String getBtnSaveXPATH() {
 		return btnSaveXPath;
 	}

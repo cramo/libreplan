@@ -62,6 +62,7 @@ public class ProjectTest {
 		System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("http://demo.libreplan.org/libreplan/planner/index.zul");
+		// driver.get("http://localhost:8180/libreplan/");
 		wait = new WebDriverWait(driver, 10);
 		LoginPage login = PageFactory.initElements(driver, LoginPage.class);
 		login.remplirChampsLogin("admin", "admin");
@@ -86,6 +87,11 @@ public class ProjectTest {
 		verifyOrderOfHorizontalTabs();
 		// 6ieme pas
 		saveAndCancelButtonVerifications();
+		// 7ieme pas
+		projectDetailPage.getBtnCancel().click();
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivConfirmCancel().getText())));
+		assertEquals("Confirmer la fenêtre de sortie", projectDetailPage.getDivConfirmCancel().getText());
 	}
 
 	private void calendarIsDisplayed() {
@@ -153,7 +159,9 @@ public class ProjectTest {
 
 	private void verifyOrderOfVerticalTabs() {
 		List<WebElement> tabs = driver.findElements(By.xpath(
-				"//*[substring(@id, string-length(@id) - string-length('r3') +1) = 'r3']/tbody/tr/td/table/tbody/tr/td/span/table/tbody/tr[2]/td[2]"));//r3 demo r3
+				"//*[substring(@id, string-length(@id) - string-length('r3') +1) = 'r3']/tbody/tr/td/table/tbody/tr/td/span/table/tbody/tr[2]/td[2]"));// r3
+																																						// demo
+																																						// r3
 		// System.out.println("lignes = " + tabs.size());
 		List<String> str = new ArrayList<String>();
 		str.add("Planification de projet");
@@ -175,8 +183,10 @@ public class ProjectTest {
 		assertEquals(5, i);
 	}
 
-	private void verifyOrderOfHorizontalTabs() {
-		List<WebElement> tabs = driver.findElements(By.xpath("//ul/li/div/div/div[contains(@id, 'v-hm')]/span")); // demo v-hm
+	private void verifyOrderOfHorizontalTabs() {//*[@id="n38Vrv-cave"]
+		List<WebElement> tabs = driver.findElements(By.xpath("//ul/li/div/div/div[contains(@id, 'v-cave')]/span")); // gc-cave
+																													// demo
+																													// v-hm
 		// ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span
 		// System.out.println("lignes = " + tabs.size());
 		List<String> str = new ArrayList<String>();
@@ -192,14 +202,14 @@ public class ProjectTest {
 		str.add("kokok");
 		int i = 0;
 		for (WebElement tab : tabs) {
-			// System.out.println("tab = " + tab.getAttribute("innerHTML"));
+			System.out.println("tab = " + tab.getAttribute("innerHTML"));
 			if (tab.getAttribute("innerHTML").equals(str.get(i))) {
 				i++;
 				// System.out.println("if = " + i);
 			}
-			// System.out.println("boucle = " + i);
+			System.out.println("boucle = " + i);
 		}
-		// System.out.println("result = " + i);
+		System.out.println("result = " + i);
 		assertEquals(9, i);
 	}
 
