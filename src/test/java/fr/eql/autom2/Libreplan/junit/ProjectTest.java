@@ -77,15 +77,21 @@ public class ProjectTest {
         projectDetailPage = projectEditor.clickAcceptCreateProject();
         detailProjectPageDisplayed();
         //4ieme pas
-        verifyOrderOfTabs();
-      //*[@id="xSrE14-box"]/tbody/tr[2]/td[2]
-      //*[@id="xSrE34-box"]/tbody/tr[2]/td[2]
-      //*[@id="xSrE54-box"]/tbody/tr[2]/td[2]
-      //*[@id="xSrE54-box"]/tbody/tr[2]/td[2]
-      //*[@id="xSrEb4-box"]/tbody/tr[2]/td[2] 
-    	/*String hex = "b4";
-        int value = Integer.parseInt(hex, 16);
-        System.out.println(value);*/
+        verifyOrderOfVerticalTabs();
+        
+        /*WebElement el = driver.findElement(By.xpath("//ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span"));
+        System.out.println("text =" + el.getText());
+        System.out.println("value =" + el.getCssValue("text"));
+        System.out.println("innerHTML =" + el.getAttribute("innerHTML"));
+        System.out.println("value =" + el.getAttribute("textContent"));*/
+        
+      //*[@id="o60X6v-hm"]/span
+      //*[@id="r43Sav-hm"]/span
+        		//*[@id="yIyVxu-hm"]/span
+        		//*[@id="o60X6v-hm"]/span
+        //5ieme pas
+        verifyOrderOfHorizontalTabs();
+        //6ieme pas
     }
 
     private void calendarIsDisplayed() {
@@ -140,9 +146,9 @@ public class ProjectTest {
         assertEquals("Détail du projet", projectDetailPage.getTableProjectDetail().getText());
 	}
 	
-	private void verifyOrderOfTabs() {
+	private void verifyOrderOfVerticalTabs() {
 		List<WebElement> tabs = driver.findElements(By.xpath("//*[substring(@id, string-length(@id) - string-length('r3') +1) = 'r3']/tbody/tr/td/table/tbody/tr/td/span/table/tbody/tr[2]/td[2]"));
-		System.out.println("lignes = " + tabs.size());
+		//System.out.println("lignes = " + tabs.size());
 		List<String> str = new ArrayList<String>();
 		str.add("Planification de projet");
 		str.add("Détail du projet");
@@ -152,15 +158,44 @@ public class ProjectTest {
 		str.add("test");
 		int i = 0;
 		for(WebElement tab : tabs){
-			System.out.println("tab = " + tab.getText());
+			//System.out.println("tab = " + tab.getText());
 			if(tab.getText().equals(str.get(i))){
+				i++;
+				//System.out.println("if = " + i);
+			}
+			//System.out.println("boucle = " + i);
+		}
+		//System.out.println("result = " + i);
+		assertEquals(5, i); 	
+	}
+	
+	private void verifyOrderOfHorizontalTabs() {
+		List<WebElement> tabs = driver.findElements(By.xpath("//ul/li/div/div/div[contains(@id, 'v-hm')]/span"));
+		//ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span
+		//System.out.println("lignes = " + tabs.size());
+		List<String> str = new ArrayList<String>();
+		str.add("WBS (tâches)");
+		str.add("Données générales");
+		str.add("Coût");
+		str.add("Avancement");
+		str.add("Libellés");
+		str.add("Exigence de critère");
+		str.add("Matériels");
+		str.add("Formulaires qualité des tâches");
+		str.add("Autorisation");
+		str.add("kokok");
+		int i = 0;
+		for(WebElement tab : tabs){
+			System.out.println("tab = " + tab.getAttribute("innerHTML"));
+			if(tab.getAttribute("innerHTML").equals(str.get(i))){
 				i++;
 				System.out.println("if = " + i);
 			}
 			System.out.println("boucle = " + i);
 		}
 		System.out.println("result = " + i);
-		assertEquals(5, i); 	
+		assertEquals(9, i); 
+		//*[@id="yIyVxu-hm"]/span
 	}
 
     @After
