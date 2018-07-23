@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -59,7 +60,7 @@ public class ProjectTest {
     }
 
     @Test
-    public void firstTest() {
+    public void firstTest() throws InterruptedException {
         //1er pas
         calendarIsDisplayed();
         //2ieme pas
@@ -69,8 +70,29 @@ public class ProjectTest {
         //3ieme pas
         fillingCreateProjectObject();
         projectDetailPage = projectEditor.clickAcceptCreateProject();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableProjectDetailXPath())));
+        //Thread.sleep(5000);
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getSpanMenuWBSXPath())));
+        //wait.until(ExpectedConditions.and(ExpectedConditions.attributeContains(By.xpath(projectDetailPage.getTableProjectDetailXPath()), projectDetailPage.getTableProjectDetail().getText(), "Détail du projet"), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableProjectDetailXPath()))));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableProjectDetailXPath())));
+        /*boolean result = false;
+        int attempts = 0;
+        while(attempts < 20) {
+            try {
+            	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableProjectDetailXPath())));
+                result = true;
+                break;
+            } catch(StaleElementReferenceException e) {
+            }
+            attempts++;
+        }*/
+        
+        //wait.until(ExpectedConditions.attributeToBe(By.xpath(projectDetailPage.getTableProjectDetailXPath()), projectDetailPage.getTableProjectDetail().getAttribute(name), "Détail du projet"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getTableDashboardXPath())));
+        assertEquals(true, projectDetailPage.getSpanMenuWBS().isDisplayed());
+        assertEquals("WBS (tâches)", projectDetailPage.getSpanMenuWBS().getText());
         assertEquals(true, projectDetailPage.getTableProjectDetail().isDisplayed());
+        assertEquals("Détail du projet", projectDetailPage.getTableProjectDetail().getText());
+        System.out.println(projectDetailPage.getTableProjectDetail().getText());
     }
 
     private void calendarIsDisplayed() {
@@ -105,7 +127,7 @@ public class ProjectTest {
     
 	private void fillingCreateProjectObject() {
 		Random rand = new Random();
-		int  n = rand.nextInt(50) + 1;
+		int  n = rand.nextInt(500) + 1;
 		projectEditor.setInputName("PROJET_TEST1" + n);
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getCheckboxCodeGenerateXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getCheckboxCodeGenerateXPath()))));
         projectEditor.setCheckboxCodeGenerate(State.OFF);
@@ -114,13 +136,13 @@ public class ProjectTest {
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxBeginXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxBeginXPath()))));
         projectEditor.setDateboxBegin(dtf.format(time.plusDays(5)));
         wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxDeadlineXPath())), ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxDeadlineXPath()))));
-        projectEditor.setDateboxDeadline(dtf.format(time.plusDays(15)));
+        projectEditor.setDateboxDeadline(dtf.format(time.plusDays(15)));	
 	}
 
     @After
     public void afterTest() throws InterruptedException {
-    	/*Thread.sleep(2000);
-        this.driver.quit();*/
+    	//Thread.sleep(2000);
+        this.driver.quit();
     }
 }
 
