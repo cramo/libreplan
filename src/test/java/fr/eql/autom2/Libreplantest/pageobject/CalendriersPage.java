@@ -13,11 +13,19 @@ public class CalendriersPage extends MasterPage
 
 	@FindBy(xpath="(.//td[.//text()[contains(., 'Créer')]])[1]")
 	private WebElement boutonCreer;
+	@FindBy(xpath="//div[@class='z-dottree-header']/descendant::div[.//text()[contains(., 'Nom')]]")
+	private WebElement headNom;
+	@FindBy(xpath="//div[@class='z-dottree-header']/descendant::div[.//text()[contains(., 'Hérité de la date')]]")
+	private WebElement headHeriteDeLaDate;
+	@FindBy(xpath="//div[@class='z-dottree-header']/descendant::div[.//text()[contains(., 'Héritages à jour')]]")
+	private WebElement headHeritageAJour;
+	@FindBy(xpath="//div[@class='z-dottree-header']/descendant::div[.//text()[contains(., 'Opérations')]]")
+	private WebElement HeadOperations;
 	
 
 	public CalendriersPage(WebDriver driver) {
 		super(driver);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public CreerCalendriePage createCalendrie() {
@@ -37,6 +45,12 @@ public class CalendriersPage extends MasterPage
 		return PageFactory.initElements(driver, CreerCalendriePage.class);
 	}
 	
-	
+	public Boolean checkoutTableHeader() {
+		return headNom.isDisplayed() 
+				&& headHeriteDeLaDate.isDisplayed()
+				&& headHeritageAJour.isDisplayed()
+				&& HeadOperations.isDisplayed()
+				&& boutonCreer.isDisplayed();
+	}
 
 }
