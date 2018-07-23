@@ -1,7 +1,11 @@
 package fr.eql.autom2.Libreplantest.pageobject;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
@@ -18,20 +22,25 @@ public class CreateProfilPage extends MasterPage {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@FindBy(how = How.XPATH, using="//*[contains(@id, 'x4-cnt')]")
+    private final String titleCreatePageXpath = "//*[substring(@id, string-length(@id) - string-length('x4-cnt') +1) = 'x4-cnt']";
+    @FindBy(xpath = titleCreatePageXpath)
 	private WebElement titleCreatePage;
 
-	@FindBy(how = How.CLASS_NAME, using="focus-element z-textbox z-textbox-text-invalid")
+    private final String fieldNameXpath = "//*[substring(@id, string-length(@id) - string-length('a5') +1) = 'a5']";
+    @FindBy(xpath = fieldNameXpath)
 	private WebElement fieldName;
 	
-	@FindBy(how = How.XPATH, using="//*[contains(@id, 'e5-btn')]")
+    private final String menuDeroulantUserRoleXpath = "//*[substring(@id, string-length(@id) - string-length('e5-real') +1) = 'e5-real']";
+    @FindBy(xpath = menuDeroulantUserRoleXpath)
 	private WebElement menuDeroulantUserRole;
 
-	@FindBy(how = How.CLASS_NAME, using="z-button-cm")
+    private final String btnAddRoleXpath = "//*[substring(@id, string-length(@id) - string-length('f5-box') +1) = 'f5-box']/tbody/tr[2]/td[@class='z-button-cm']";
+	@FindBy(xpath = btnAddRoleXpath)
 	private WebElement btnAddRole;
 	
-	@FindBy(how=How.XPATH, using="icono z-button")
-	private WebElement titleIcone;
+    private final String InfosBulleDeleteIconXpath = "//*[substring(@id, string-length(@id) - string-length('r4-cell') +1) = 'r4-cell']/span";
+	@FindBy(xpath = InfosBulleDeleteIconXpath)
+	private WebElement InfosBulleDeleteIcon;
 	
 	public boolean assertTitleCreateProfilPage() {
 		boolean assertResult = this.titleCreatePage.isDisplayed();
@@ -45,13 +54,17 @@ public class CreateProfilPage extends MasterPage {
 	
 	public void selectUserRole(String role) {
 		
-		Select menu = new Select(menuDeroulantUserRole);
-		menu.selectByVisibleText(role);
+		menuDeroulantUserRole.clear();
+		menuDeroulantUserRole.sendKeys(role);
 		btnAddRole.click();
 	}
 	
-	public void assertUserRoleExist(String name) {
-		
+	public void addNewUserRole (String name, String role) {
+		this.fieldName.clear();
+		this.fieldName.sendKeys(name);
+		menuDeroulantUserRole.clear();
+		menuDeroulantUserRole.sendKeys(role);
+		btnAddRole.click();
 	}
 	
 	public int numeroDeColonneParEntete(String header) {
@@ -65,20 +78,76 @@ public class CreateProfilPage extends MasterPage {
 				ligneTrouvee = ligneCourante;
 				return ligneTrouvee;
 			}
-			
 			ligneCourante++;
 		}
 		return ligneCourante;
 	}
+
+	public boolean trouverLigneContenantUserRoleParNOm(Set<String> roles) {
+//	Set<String> rolesTrouves = new HashSet<String>();
+	int nombreTrouvee = 0;
+	List<WebElement> lignes = driver.findElements(By.xpath("//div[contains(@id, 'g5-body')]/table/tbody[2]/tr"));
+	int ligneTrouvee = -1;
+	int ligneCourant = 0;
+	for (WebElement webElement : lignes) {
+		WebElement numeroCase = webElement.findElement(By.xpath("td[1]/div/span"));
+		String textRole = numeroCase.getText();
+		if(roles.contains(textRole)) {
+			ligneTrouvee = ligneCourant;
+//			rolesTrouves.add(textRole);
+			nombreTrouvee++;
+		}
+		ligneCourant++;
+	}
 	
-	public int trouverLigneContenantUserRoleParNOm(String nom) {
-		List<WebElement> lignes = this.driver.findElements(By.xpath("//div[contains(@id, 'g5-body')]/table/tbody[2]/tr"));
+//	return rolesTrouves.size() == roles.size();
+	return nombreTrouvee == roles.size();
+}
+	
+	public boolean trouverLigneContenantUserRoleDeletet(Set<String> roles) {
+		int nombreTrouvee = 0;
+		List<WebElement> lignes = driver.findElements(By.xpath("//div[contains(@id, 'g5-body')]/table/tbody[2]/tr"));
+		int ligneTrouvee = -1;
+		int ligneCourant = 0;
+		for (WebElement webElement : lignes) {
+			WebElement numeroCase = webElement.findElement(By.xpath("td[1]/div/span"));
+			String textRole = numeroCase.getText();
+			if(roles.contains(textRole)) {
+				ligneTrouvee = ligneCourant;
+				nombreTrouvee++;
+			}
+			ligneCourant++;
+		}
+		
+		return false;
+	}
+	
+	public int trouverLigneContenantIconeDeleteRoleParNom(Set<String> roles) {
+		int nombreTrouvee = 0;
+		List<WebElement> lignes = driver.findElements(By.xpath("//div[contains(@id, 'g5-body')]/table/tbody[2]/tr"));
 		int ligneTrouvee = -1;
 		int ligneCourante = 0;
+		for (WebElement webElement : lignes) {
+			WebElement numeroCase = webElement.findElement(By.xpath("td[1]/div/span"));
+			String textRole = numeroCase.getText();
+			if (roles.contains(textRole)) {
+				ligneTrouvee = ligneCourante;
+				nombreTrouvee++;
+			}
+			ligneCourante++;
+		}
 		
+		return nombreTrouvee;
+	}
+	
+	
+	public int trouverLigneContenantUserRoleParNOm2(String nom, int numeroLigneUser) {
+		List<WebElement> lignes = this.driver.findElements(By.xpath("//div[contains(@id, 'g5-body')]/table/tbody[2]/tr["+numeroLigneUser+"]"));
+		int ligneTrouvee = -1;
+		int ligneCourante = 0;
 		for (WebElement ligne : lignes) {
-			WebElement premiereCase = ligne.findElement(By.xpath("td[1]/div/span"));
-			if (nom.equals(premiereCase.getText())) {
+			WebElement numeroCase = ligne.findElement(By.xpath("td[1]/div/span"));
+			if (nom.equals(numeroCase.getText())) {
 				ligneTrouvee = ligneCourante;
 				return ligneTrouvee;
 			}
@@ -88,19 +157,40 @@ public class CreateProfilPage extends MasterPage {
 		return ligneTrouvee;
 	}
 	
-	public void cliquerSurIconeSuppressionRole(String nom) throws InvalidArgumentException {
-		int numeroLigne = this.trouverLigneContenantUserRoleParNOm(nom);
+	public void cliquerSurIconeSuppressionRole(Set<String> roles) {
+		int numeroLigne = this.trouverLigneContenantIconeDeleteRoleParNom(roles);
 		if (numeroLigne != -1) {
-			WebElement lien = this.driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr[" + (numeroLigne+1) + "]/td[2]/div/span"));
+			WebElement lien = this.driver.findElement(By.xpath("//*[substring(@id, string-length(@id) - string-length('g5-body') +1) = 'g5-body']/table/tbody[2]/tr[" + (numeroLigne+1) + "]/td[2]/div/span/table/tbody/tr[2]/td[2]"));
 			lien.click();
 		}
 		
+//		throw new InvalidArgumentException("Ligne trouvée = " +numeroLigne);
+	}
+	
+	public boolean AssertSurIconeSuppressionRole(String nom, int numeroLigneUser) throws InvalidArgumentException {
+		int numeroLigne = this.trouverLigneContenantUserRoleParNOm2(nom, numeroLigneUser);
+		if (numeroLigne != -1) {
+			WebElement lien = this.driver.findElement(By.xpath("//*[substring(@id, string-length(@id) - string-length('g5-body') +1) = 'g5-body']/table/tbody[2]/tr[" + (numeroLigne+1) + "]/td[2]/div[1]/span"));
+			String title1 = lien.getAttribute("title");
+			boolean result = title1.contains("Supprimer");
+			return result;
+		}
 		throw new InvalidArgumentException("Ligne trouvée = " +numeroLigne);
 	}
 	
-	public void assertDeleteBtnBubbleInfos() {
-		
+	public Set<String> assertAfterDelete(Set<String> roles) {
+		Set<String> listBeforeDelete = new HashSet<String>();
+		List<WebElement> arrayBeforeDelete = driver.findElements(By.xpath("//div[contains(@id, 'g5-body')]/table/tbody[2]/tr"));
+		for (WebElement roleName : arrayBeforeDelete) {
+			WebElement numeroCase = roleName.findElement(By.xpath("td[1]/div/span"));
+			String textRole = numeroCase.getText();
+			if (roles.contains(textRole)) {
+				listBeforeDelete.add(textRole);
+			}
+		}
+		return listBeforeDelete;
 	}
+
 	
 	
 }

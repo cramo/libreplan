@@ -14,6 +14,13 @@ public class ProfilsPage extends MasterPage {
 	
 	private String idPrefix;
 	
+    private final String btnCreateProfilXpath = "//*[substring(@id, string-length(@id) - string-length('v4-box') +1) = 'v4-box']/tbody/tr[2]/td[@class='z-button-cm']";
+	@FindBy(xpath = btnCreateProfilXpath)
+	private WebElement btnCreateProfil;
+	
+	
+	
+	
 	public ProfilsPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
@@ -44,10 +51,9 @@ public class ProfilsPage extends MasterPage {
 		return assertResult;
 	}
 	
-//	public CreateProfilPage clickButtonCreate(WebDriver driver) {
-//		
-//		btnCreate.click();
-//		return PageFactory.initElements(driver, CreateProfilPage.class);
-//	}
+	public CreateProfilPage clickButtonCreate(WebDriver driver) {
+		btnCreateProfil.click();
+		return PageFactory.initElements(driver, CreateProfilPage.class);
+	}
 
 }
