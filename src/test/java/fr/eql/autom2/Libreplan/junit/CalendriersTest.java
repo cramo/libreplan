@@ -35,7 +35,7 @@ public class CalendriersTest extends MasterTest{
 		// Inplicite Wait
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		
-		// TODO : vérifier le page Calendrier
+		// 1 : vérifier le page Calendrier
 		MasterPage menu = PageFactory.initElements(driver, MasterPage.class);
 		CalendriersPage calListePage = menu.goToCalendriersPage();
 		WebElement ongletCalendrier = driver.findElement(By.xpath("(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[1]/descendant::button)[1]"));
@@ -93,10 +93,10 @@ public class CalendriersTest extends MasterTest{
 		boutonOuvert.click();
 		assertFalse("vérifier si 'Calendrier - Test Calendrier Dérivé' est masqué", calendrierDerive.isDisplayed());
 		
-		// TODO : creer une copie de calendrier
+		// 10 : creer une copie de calendrier
 		calListePage.createUneCopieCalendrie(test1);
 		waitCalPage.until(ExpectedConditions.visibilityOf(titreCreerCalendrier));
-		//assertTrue("vérifier l'affichage de copie de calendrier Test 1", cal.checkoutCreerCopieCalendrier(test1, "Calendrier source"));
+//		assertTrue("vérifier l'affichage de copie de calendrier Test 1", cal.checkoutCreerCopieCalendrier(test1, "Calendrier source"));
 		
 		
 		// 11 : creer une copie de calendrier (non passant)

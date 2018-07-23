@@ -108,7 +108,7 @@ public class CreerCalendriePage extends MasterPage
 	}
 	
 	public Boolean checkoutCreerCopieCalendrier(String nom, String type) {
-		return inputNom.getText().equals(nom)
+		return inputNom.getAttribute("innerHTML").equals(nom)
 				&& typeCalendrier.getText().equals(type);
 	}
 	
