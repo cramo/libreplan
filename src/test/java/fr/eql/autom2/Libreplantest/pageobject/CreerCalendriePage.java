@@ -2,6 +2,7 @@ package fr.eql.autom2.Libreplantest.pageobject;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,11 @@ public class CreerCalendriePage extends MasterPage
 	private WebElement boutonAnnuler;
 	@FindBy(xpath=".//span[.//text()[contains(., 'Nom')]]/../../following-sibling::td/div/input")
 	private WebElement inputNom;
+	@FindBy(xpath="//span[@class='z-tab-text']")
+	private WebElement ongletDonnesDeCalendrier;
+	@FindBy(xpath="//tr[@class='calendar-data z-row z-grid-odd']//td[2]//span[1]")
+	private WebElement typeCalendrier;
+	
 	/**
 	 * Onglet Exceptions 
 	 */
@@ -46,11 +52,11 @@ public class CreerCalendriePage extends MasterPage
 	
 	public CreerCalendriePage(WebDriver driver) {
 		super(driver);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	/**
-	 * Méthodes
+	 * Méthodes actions
 	 */
 	public CalendriersPage fillInNameOfCalendar(String nom) {
 		inputNom.sendKeys(nom);
@@ -87,4 +93,24 @@ public class CreerCalendriePage extends MasterPage
 		boutonEnregistrer.click();
 		return PageFactory.initElements(driver, CalendriersPage.class);
 	}
+	
+	// vérifications 
+	public Boolean checkoutCreerCalendrier() {
+		return ongletDonnesDeCalendrier.isDisplayed()
+				&& boutonAnnuler.isDisplayed()
+				&& boutonEnregistrer.isDisplayed()
+				&& boutonEnregistrerEtContinuer.isDisplayed();
+	}
+	
+	public Boolean checkoutCreerCalendrieirDerive(String type) {
+		return inputNom.getText().isEmpty()
+				&& typeCalendrier.getText().equals(type);
+	}
+	
+	public Boolean checkoutCreerCopieCalendrier(String nom, String type) {
+		return inputNom.getText().equals(nom)
+				&& typeCalendrier.getText().equals(type);
+	}
+	
+
 }
