@@ -11,60 +11,60 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ProjectEditor extends MasterPage implements IProjectEditor {
 
-    private final String inputNameXPath = "//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']";//p7
+    private final String inputNameXPath = "//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']";//p7 demo _8
     @FindBy(xpath = inputNameXPath)
     private WebElement inputName;
 
-    private final String inputModelXPath = "//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']";//v7-real
+    private final String inputModelXPath = "//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']";//v7-real demo 48-real
     @FindBy(xpath = inputModelXPath)
     private WebElement inputModel;
 
-    private final String btnSearchModelXPath = "//*[substring(@id, string-length(@id) - string-length('v7-btn') +1) = 'v7-btn']";
+    private final String btnSearchModelXPath = "//*[substring(@id, string-length(@id) - string-length('v7-btn') +1) = 'v7-btn']";//v7-btn demo v7-btn
     @FindBy(xpath = btnSearchModelXPath)
     private WebElement btnSearchModel;
 
-    private final String inputCodeXPath = "//*[substring(@id, string-length(@id) - string-length('j8') +1) = 'j8']";//38
+    private final String inputCodeXPath = "//*[substring(@id, string-length(@id) - string-length('j8') +1) = 'j8']";//38 demo j8
     @FindBy(xpath = inputCodeXPath)
     private WebElement inputCode;
 
-    private final String checkboxCodeGenerateXPath = "//*[substring(@id, string-length(@id) - string-length('k8-real') +1) = 'k8-real']";//48-real
+    private final String checkboxCodeGenerateXPath = "//*[substring(@id, string-length(@id) - string-length('k8-real') +1) = 'k8-real']";//48-real demo k8-real
     @FindBy(xpath = checkboxCodeGenerateXPath)
     private WebElement checkboxCodeGenerate;
 
-    private final String dateboxBeginXPath = "//*[substring(@id, string-length(@id) - string-length('n8-real') +1) = 'n8-real']";//k9-real
+    private final String dateboxBeginXPath = "//*[substring(@id, string-length(@id) - string-length('n8-real') +1) = 'n8-real']";//k9-real demo n8-real
     @FindBy(xpath = dateboxBeginXPath)
     private WebElement dateboxBegin;
 
-    private final String btnDateboxBeginXPath = "//*[substring(@id, string-length(@id) - string-length('n8-btn') +1) = 'n8-btn']";//k9-btn
+    private final String btnDateboxBeginXPath = "//*[substring(@id, string-length(@id) - string-length('n8-btn') +1) = 'n8-btn']";//k9-btn demo n8-btn
     @FindBy(xpath = btnDateboxBeginXPath)
     private WebElement btnDateboxBegin;
 
-    private final String dateboxDeadlineXPath = "//*[substring(@id, string-length(@id) - string-length('q8-real') +1) = 'q8-real']";//n9-real
+    private final String dateboxDeadlineXPath = "//*[substring(@id, string-length(@id) - string-length('q8-real') +1) = 'q8-real']";//n9-real demo q8-real
     @FindBy(xpath = dateboxDeadlineXPath)
     private WebElement dateboxDeadline;
 
-    private final String btnDateboxDeadlineXPath = "//*[substring(@id, string-length(@id) - string-length('q8-btn') +1) = 'q8-btn']";//n9-btn
+    private final String btnDateboxDeadlineXPath = "//*[substring(@id, string-length(@id) - string-length('q8-btn') +1) = 'q8-btn']";//n9-btn demo q8-btn
     @FindBy(xpath = btnDateboxDeadlineXPath)
     private WebElement btnDateboxDeadline;
 
-    private final String inputClientXPath = "//*[substring(@id, string-length(@id) - string-length('v8-real') +1) = 'v8-real']";//s9-real
+    private final String inputClientXPath = "//*[substring(@id, string-length(@id) - string-length('v8-real') +1) = 'v8-real']";//s9-real demo v8-real
     @FindBy(xpath = inputClientXPath)
     private WebElement inputClient;
 
-    private final String btnSearchClientXPath = "//*[substring(@id, string-length(@id) - string-length('v8-btn') +1) = 'v8-btn']";//s9-btn
+    private final String btnSearchClientXPath = "//*[substring(@id, string-length(@id) - string-length('v8-btn') +1) = 'v8-btn']";//s9-btn demo v8-btn
     @FindBy(xpath = btnSearchClientXPath)
     private WebElement btnSearchClient;
 
-    private final String selectCalendarXPath = "//*[substring(@id, string-length(@id) - string-length('59-real') +1) = '59-real']";//0a-real
+    private final String selectCalendarXPath = "//*[substring(@id, string-length(@id) - string-length('59-real') +1) = '59-real']";//0a-real demo 59-real
     @FindBy(xpath = selectCalendarXPath)
     private WebElement selectCalendar;
 
-    private final String btnAcceptXPath = "//*[substring(@id, string-length(@id) - string-length('79-box') +1) = '79-box']/tbody/tr[2]/td[2]";
+    private final String btnAcceptXPath = "//*[substring(@id, string-length(@id) - string-length('79-box') +1) = '79-box']/tbody/tr[2]/td[2]";//2a-box demo 79-box
     //*[@id="dHAQ79-box"]/tbody/tr[2]/td[2]
     @FindBy(xpath = btnAcceptXPath)
     private WebElement btnAccept;
 
-    private final String btnCancelXPath = "//*[substring(@id, string-length(@id) - string-length('89-box') +1) = '89-box']/tbody/tr[2]/td[2]";
+    private final String btnCancelXPath = "//*[substring(@id, string-length(@id) - string-length('89-box') +1) = '89-box']/tbody/tr[2]/td[2]";//3a-box demo 89-box
     //*[@id="dHAQ89-box"]/tbody/tr[2]/td[2]
     @FindBy(xpath = btnCancelXPath)
     private WebElement btnCancel;
@@ -239,19 +239,7 @@ public class ProjectEditor extends MasterPage implements IProjectEditor {
     }
 
     public void createProject() {
-        /* element1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']")));
-        WebElement element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('_8') +1) = '_8']")));
-        setInputName("test");*/
-        /*WebElement element3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']")));
-        WebElement element4 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('48-real') +1) = '48-real']")));*/
-        /*try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-        //setInputModel("test2");
 
-        //setInputClient("test4");
     }
 
     public void saveProject() {
