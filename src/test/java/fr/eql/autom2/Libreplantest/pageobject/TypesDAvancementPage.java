@@ -74,26 +74,6 @@ public class TypesDAvancementPage extends MasterPage{
 	@FindBy(xpath="//*[contains(text(),\"Modifier\") and @class=\"z-tab-text\"]")
 	public WebElement lblModifierTitre;
 	
-//	@FindBy(xpath="//*[contains(text(),\"Nom d'unité\") and @class=\"z-label\"]")
-//	public WebElement lblNomUnite;
-//	
-//	@FindBy(xpath="//*[contains(text(),\"Actif\") and @class=\"z-label\"]")
-//	public WebElement lblActif;
-//	
-//	@FindBy(xpath="//*[contains(text(),\"Valeur maximum par défaut\") and @class=\"z-label\"]")
-//	public WebElement lblMaxParDefaut;
-//	
-//	@FindBy(xpath="//*[contains(text(),\"Précision\") and @class=\"z-label\"]")
-//	public WebElement lblPrecision	;
-//	
-//	@FindBy(xpath="//div[@class=\"z-tabpanels\"]//span[contains(text(),\"Type\") and @class=\"z-label\"]")
-//	public WebElement lblType;
-//	
-//	@FindBy(xpath="//span[contains(text(),\"Pourcentage\") and @class=\"z-label\"]")
-//	public WebElement lblPourcentage;
-	
-	
-	
 
 	// CONSTRUCTEUR
 	public TypesDAvancementPage(WebDriver driver) {

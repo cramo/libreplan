@@ -89,8 +89,7 @@ public class AVA_01_CreationTypeAvancementTest extends MasterTest {
 		
 		
 		
-		
-		
+	
 		// !!!!!!!!!!
 		// vérifie la Valeur maximum par défaut : champ de saisie avec pour valeur par défaut "100,00"
 		//System.out.println(typesDAvancementPage.txtValeurMax.getText());
