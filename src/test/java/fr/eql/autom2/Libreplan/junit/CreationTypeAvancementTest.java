@@ -29,7 +29,7 @@ public class CreationTypeAvancementTest extends MasterTest {
 	@Test
 	public void monCreationTypeAvancementTest() throws FileNotFoundException, IOException, InterruptedException {
 
-		// TimeOut automatique
+		// TimeOut automatique.
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
 
