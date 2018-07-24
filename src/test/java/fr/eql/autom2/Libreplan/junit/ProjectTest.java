@@ -38,11 +38,12 @@ public class ProjectTest {
 	private final String calendarXPath = "//*[substring(@id, string-length(@id) - string-length('7-b') +1) = '7-b']";// 7-b
 	private CompagnyViewPage compagnyViewPage;
 	private ProjectEditor projectEditor;
-	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d MMM yyyy");
 	private LocalDateTime time = LocalDateTime.now();
 	private ProjectDetailPage projectDetailPage;
 	private MasterPage masterPage;
 	private ProjectPage projectPage;
+	private List<String> data;
 
 	@Before
 	public void beforeTest() {
@@ -68,11 +69,13 @@ public class ProjectTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		/*System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
-		driver = new ChromeDriver();*/
+		/*
+		 * System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
+		 * driver = new ChromeDriver();
+		 */
 		System.setProperty("webdriver.gecko.driver", "C:\\dev\\geckodriver.exe");
 		driver = new FirefoxDriver();
-		//driver.get("http://demo.libreplan.org/libreplan/planner/index.zul");
+		// driver.get("http://demo.libreplan.org/libreplan/planner/index.zul");
 		driver.get("http://localhost:8180/libreplan/");
 		wait = new WebDriverWait(driver, 5);
 		LoginPage login = PageFactory.initElements(driver, LoginPage.class);
@@ -80,16 +83,17 @@ public class ProjectTest {
 		compagnyViewPage = login.cliquerLogin();
 		// driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		masterPage = PageFactory.initElements(driver, MasterPage.class);
+		data = new ArrayList<String>();
 	}
 
 	@Test
-	public void firstTest() throws InterruptedException{
-		//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		
-		//ProjectPage projectPage = masterPage.goToProjectsPage();
+	public void firstTest() {
+		// driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
+		// ProjectPage projectPage = masterPage.goToProjectsPage();
 		// 1er pas
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/libreplan/planner/index.zul;orders_list']")));
-		//projectPage = masterPage.goToProjectsPage();
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/libreplan/planner/index.zul;orders_list']")));
+		// projectPage = masterPage.goToProjectsPage();
 		calendarIsDisplayed();
 		// 2ieme pas
 		projectEditor = compagnyViewPage.clickCreateProject();
@@ -114,19 +118,56 @@ public class ProjectTest {
 		// 10ieme pas
 		clickOkAndVerifyElements();
 		// 11ieme pas
-		//goToProfilAndVerif();
+		goToProfilAndVerif();
 		// 12ieme pas
-		//masterPage = PageFactory.initElements(driver, MasterPage.class);
-		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/libreplan/planner/index.zul;orders_list']")));
-		Thread.sleep(3000);
-		projectPage = masterPage.goToProjectsPage();
+		// masterPage = PageFactory.initElements(driver, MasterPage.class);
+		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/libreplan/planner/index.zul;orders_list']")));
+		System.out.println("salut");
+		try {
+			verifyProjectInformations();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
+	private void verifyIcons() throws InterruptedException {
+		//Thread.sleep(5000);
+		//projectPage = masterPage.goToProjectsPage();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/table/tbody/tr/td/table/tbody/tr")));
+		//Thread.sleep(2000);
+		//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td
+		List<WebElement> lines = driver
+				.findElements(By.xpath("//*[substring(@id, string-length(@id) - string-length('i7-real') +1) = '7-real']/tbody/tr"));
+		int i = 0;
+		int result = 0;
+		System.out.println("str = " + data);
+		System.out.println("lignes = " + lines.size());
+		for (WebElement ligne : lines) {
+			System.out.println("une ligne = " + ligne.getText());
+			if (data.get(0).equals(lines.get(i).getText())) {
+				System.out.println("trouvé");
+				result = i;
+				//i = i + 7;
+				int n = 0;
+				assertEquals(lines.get(result).getText(), data.get(n));
+				assertEquals(lines.get(result + 1).getText(), data.get(n + 1));
+				assertEquals(lines.get(result + 2).getText(), data.get(n + 2));
+				assertEquals(lines.get(result + 3).getText(), data.get(n + 3));
+				assertEquals(lines.get(result + 4).getText(), data.get(n + 4));
+				assertEquals(lines.get(result + 5).getText(), data.get(n + 5));
+				assertEquals(lines.get(result + 6).getText(), data.get(n + 6));
+				assertEquals(lines.get(result + 7).getText(), data.get(n + 7));
+				break;
+			}
+			i++;
+		}
+	}
+
 	private boolean horizontalMenuIsNotPresent() {
 		try {
 			WebElement el = driver.findElement(By.xpath("//span[@class=\"z-tab-text\"]"));
-		}
-		catch (java.util.NoSuchElementException | org.openqa.selenium.NoSuchElementException e) {
+		} catch (java.util.NoSuchElementException | org.openqa.selenium.NoSuchElementException e) {
 			return true;
 		}
 		return false;
@@ -169,6 +210,7 @@ public class ProjectTest {
 		Random rand = new Random();
 		int n = rand.nextInt(999999) + 1;
 		projectEditor.setInputName("PROJET_TEST1" + n);
+		data.add(("PROJET_TEST1" + n));
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getCheckboxCodeGenerateXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getCheckboxCodeGenerateXPath()))));
@@ -177,14 +219,21 @@ public class ProjectTest {
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getInputCodeXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getInputCodeXPath()))));
 		projectEditor.setInputCode("PRJTEST001" + n);
+		data.add(("PRJTEST001" + n));
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxBeginXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxBeginXPath()))));
 		projectEditor.setDateboxBegin(dtf.format(time.plusDays(5)));
+		data.add(dtf.format(time.plusDays(5)));
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxDeadlineXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxDeadlineXPath()))));
 		projectEditor.setDateboxDeadline(dtf.format(time.plusDays(15)));
+		data.add(dtf.format(time.plusDays(15)));
+		data.add("");
+		data.add("0 €");
+		data.add("0");
+		data.add("PRE-VENTES");
 	}
 
 	private void detailProjectPageDisplayed() {
@@ -222,7 +271,8 @@ public class ProjectTest {
 	}
 
 	private void verifyOrderOfHorizontalTabs() {// *[@id="n38Vrv-cave"]
-		List<WebElement> tabs = driver.findElements(By.xpath("//span[@class=\"z-tab-text\"]")); //gc-cave // demo// v-hm
+		List<WebElement> tabs = driver.findElements(By.xpath("//span[@class=\"z-tab-text\"]")); // gc-cave // demo//
+																								// v-hm
 		// ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span
 		// System.out.println("lignes = " + tabs.size());
 		List<String> str = new ArrayList<String>();
@@ -238,14 +288,14 @@ public class ProjectTest {
 		str.add("kokok");
 		int i = 0;
 		for (WebElement tab : tabs) {
-			//System.out.println("tab = " + tab.getAttribute("innerHTML"));
+			// System.out.println("tab = " + tab.getAttribute("innerHTML"));
 			if (tab.getAttribute("innerHTML").equals(str.get(i))) {
 				i++;
 				// System.out.println("if = " + i);
 			}
-			//System.out.println("boucle = " + i);
+			// System.out.println("boucle = " + i);
 		}
-		//System.out.println("result = " + i);
+		// System.out.println("result = " + i);
 		assertEquals(9, i);
 	}
 
@@ -257,26 +307,27 @@ public class ProjectTest {
 		assertEquals(true, projectDetailPage.getBtnSaveImage().isDisplayed());
 		assertEquals(true, projectDetailPage.getBtnCancelImage().isDisplayed());
 	}
-	
+
 	private void clickAndVerifyCancelPopup() {
 		projectDetailPage.getBtnCancel().click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivTextCancelXPath())));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivTextCancelXPath())));
 		assertEquals("Confirmer la fenêtre de sortie", projectDetailPage.getDivConfirmCancelBis().getText());
-		assertEquals("Les modifications non enregistrées seront perdues. Êtes-vous sûr ?", projectDetailPage.getDivTextCancel().getText());
+		assertEquals("Les modifications non enregistrées seront perdues. Êtes-vous sûr ?",
+				projectDetailPage.getDivTextCancel().getText());
 		assertEquals("OK", projectDetailPage.getBtnConfirmOk().getText());
 		assertEquals("Annuler", projectDetailPage.getbtnConfirmCancel().getText());
 	}
-	
+
 	private void clickOkAndVerifyElements() {
 		projectDetailPage.getBtnConfirmOk().click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(compagnyViewPage.getBtnCreateProjectXPath())));
+		wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath(compagnyViewPage.getBtnCreateProjectXPath())));
 		assertEquals(true, compagnyViewPage.getTableProjectPlanification().isDisplayed());
 		assertEquals("Planification des projets", compagnyViewPage.getTableProjectPlanification().getText());
 		boolean bool = horizontalMenuIsNotPresent();
 		assertEquals(true, bool);
 	}
-	
+
 	private void goToProfilAndVerif() {
 		masterPage = PageFactory.initElements(driver, MasterPage.class);
 		ProjectPage projectPage = masterPage.goToProjectsPage();
@@ -285,44 +336,77 @@ public class ProjectTest {
 		assertEquals("Liste des projets", projectPage.getTableListOfProject().getText());
 	}
 	
+	private void verifyProjectInformations() throws InterruptedException {
+		//Thread.sleep(5000);
+		//projectPage = masterPage.goToProjectsPage();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('45-cave') +1) = '45-cave']")));
+		//Thread.sleep(2000);
+		List<WebElement> lines = driver
+				.findElements(By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/span"));
+		int i = 0;
+		int result = 0;
+		System.out.println("str = " + data);
+		System.out.println("lignes = " + lines.size());
+		for (WebElement ligne : lines) {
+			System.out.println("une ligne = " + ligne.getText());
+			if (data.get(0).equals(lines.get(i).getText())) {
+				System.out.println("trouvé");
+				result = i;
+				//i = i + 7;
+				int n = 0;
+				assertEquals(lines.get(result).getText(), data.get(n));
+				assertEquals(lines.get(result + 1).getText(), data.get(n + 1));
+				assertEquals(lines.get(result + 2).getText(), data.get(n + 2));
+				assertEquals(lines.get(result + 3).getText(), data.get(n + 3));
+				assertEquals(lines.get(result + 4).getText(), data.get(n + 4));
+				assertEquals(lines.get(result + 5).getText(), data.get(n + 5));
+				assertEquals(lines.get(result + 6).getText(), data.get(n + 6));
+				assertEquals(lines.get(result + 7).getText(), data.get(n + 7));
+				break;
+			}
+			i++;
+		}
+	}
+
 	@After
 	public void afterTest() throws InterruptedException, SQLException, ClassNotFoundException {
 		// Pour la base de données
-				/*ResultSet rs = null;
-				String DRIVER = "org.postgresql.Driver";
-				String JDBC_URL = "jdbc:postgresql://localhost:5432/libreplan";
-				String USER = "postgres";
-				String PASSWORD = "admin";
-				String querySelect = "select * from advance_type";
-				String queryRecupTest1 = "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 1'";
-				String queryRecupTest2 = "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 2'";
-				String queryDelete1 = "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 1'";
-				String queryDelete2 = "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 2'";
-
-				//Load Postgre jdbc driver
-				Class.forName(DRIVER);
-
-				//Create Connection to DB		
-				Connection con = DriverManager.getConnection(JDBC_URL,USER,PASSWORD);
-				System.out.println("Connecté à la base");
-
-				//Create Statement Object		
-				Statement stmt = con.createStatement();
-
-				// Nettoie la base pour 'Test 1'
-				try {		
-					rs= stmt.executeQuery(queryRecupTest1); // Recup 'Test 1'
-
-					if(rs != null) {
-						stmt.executeQuery(queryDelete1);	// Delete 'Test 1'
-						System.out.println("Test1 effacé de la base");
-					}		
-
-				}catch(Exception e) {
-
-				}
-				con.close();*/
-		Thread.sleep(5000);
+		/*
+		 * ResultSet rs = null; String DRIVER = "org.postgresql.Driver"; String JDBC_URL
+		 * = "jdbc:postgresql://localhost:5432/libreplan"; String USER = "postgres";
+		 * String PASSWORD = "admin"; String querySelect = "select * from advance_type";
+		 * String queryRecupTest1 =
+		 * "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 1'";
+		 * String queryRecupTest2 =
+		 * "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 2'";
+		 * String queryDelete1 =
+		 * "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 1'"; String
+		 * queryDelete2 =
+		 * "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 2'";
+		 * 
+		 * //Load Postgre jdbc driver Class.forName(DRIVER);
+		 * 
+		 * //Create Connection to DB Connection con =
+		 * DriverManager.getConnection(JDBC_URL,USER,PASSWORD);
+		 * System.out.println("Connecté à la base");
+		 * 
+		 * //Create Statement Object Statement stmt = con.createStatement();
+		 * 
+		 * // Nettoie la base pour 'Test 1' try { rs=
+		 * stmt.executeQuery(queryRecupTest1); // Recup 'Test 1'
+		 * 
+		 * if(rs != null) { stmt.executeQuery(queryDelete1); // Delete 'Test 1'
+		 * System.out.println("Test1 effacé de la base"); }
+		 * 
+		 * }catch(Exception e) {
+		 * 
+		 * } con.close();
+		 */
+		
+		//*[@id="kXEPk7-box"]/tbody/tr[2]/td[2]/img
+		//*[@id="jYFPk7-box"]/tbody/tr[2]/td[2]/img
+		
+		//Thread.sleep(5000);
 		this.driver.quit();
 	}
 }
