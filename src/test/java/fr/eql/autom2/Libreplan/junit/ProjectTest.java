@@ -15,6 +15,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -35,6 +40,8 @@ public class ProjectTest {
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
 	private LocalDateTime time = LocalDateTime.now();
 	private ProjectDetailPage projectDetailPage;
+	private MasterPage masterPage;
+	private ProjectPage projectPage;
 
 	@Before
 	public void beforeTest() {
@@ -73,6 +80,9 @@ public class ProjectTest {
 
 	@Test
 	public void firstTest(){
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		masterPage = PageFactory.initElements(driver, MasterPage.class);
+		ProjectPage projectPage = masterPage.goToProjectsPage();
 		// 1er pas
 		calendarIsDisplayed();
 		// 2ieme pas
@@ -96,23 +106,10 @@ public class ProjectTest {
 		// 9ieme pas
 		clickAndVerifyCancelPopup();
 		// 10ieme pas
-		projectDetailPage.getBtnConfirmOk().click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(compagnyViewPage.getBtnCreateProjectXPath())));
-		assertEquals(true, compagnyViewPage.getTableProjectPlanification().isDisplayed());
-		assertEquals("Planification des projets", compagnyViewPage.getTableProjectPlanification().getText());
-		boolean bool = horizontalMenuIsNotPresent();
-		assertEquals(true, bool);
-		/*try {
-			WebElement el = driver.findElement(By.xpath("//span[@class=\"z-tab-text\"]"));
-		}
-		catch (java.util.NoSuchElementException | org.openqa.selenium.NoSuchElementException e) {
-			bool = true;
-			assertEquals(true, bool);
-		}*/
-		
-		//boolean bool = horizontalMenuIsNotPresent();
-		//assertEquals(false, bool);
-		//assertEquals("Détail du projet", projectDetailPage.getTableProjectDetail().getText());
+		clickOkAndVerifyElements();
+		// 11ieme pas
+		//goToProfilAndVerif();
+		// 12ieme pas
 	}
 	
 	private boolean horizontalMenuIsNotPresent() {
@@ -160,7 +157,7 @@ public class ProjectTest {
 
 	private void fillingCreateProjectObject() {
 		Random rand = new Random();
-		int n = rand.nextInt(500) + 1;
+		int n = rand.nextInt(999999) + 1;
 		projectEditor.setInputName("PROJET_TEST1" + n);
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getCheckboxCodeGenerateXPath())),
@@ -231,7 +228,7 @@ public class ProjectTest {
 		str.add("kokok");
 		int i = 0;
 		for (WebElement tab : tabs) {
-			System.out.println("tab = " + tab.getAttribute("innerHTML"));
+			//System.out.println("tab = " + tab.getAttribute("innerHTML"));
 			if (tab.getAttribute("innerHTML").equals(str.get(i))) {
 				i++;
 				// System.out.println("if = " + i);
@@ -260,10 +257,62 @@ public class ProjectTest {
 		assertEquals("OK", projectDetailPage.getBtnConfirmOk().getText());
 		assertEquals("Annuler", projectDetailPage.getbtnConfirmCancel().getText());
 	}
-
+	
+	private void clickOkAndVerifyElements() {
+		projectDetailPage.getBtnConfirmOk().click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(compagnyViewPage.getBtnCreateProjectXPath())));
+		assertEquals(true, compagnyViewPage.getTableProjectPlanification().isDisplayed());
+		assertEquals("Planification des projets", compagnyViewPage.getTableProjectPlanification().getText());
+		boolean bool = horizontalMenuIsNotPresent();
+		assertEquals(true, bool);
+	}
+	
+	private void goToProfilAndVerif() {
+		masterPage = PageFactory.initElements(driver, MasterPage.class);
+		ProjectPage projectPage = masterPage.goToProjectsPage();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectPage.getTableListOfProjectXPath())));
+		assertEquals(true, projectPage.getTableListOfProject().isDisplayed());
+		assertEquals("Liste des projets", projectPage.getTableListOfProject().getText());
+	}
+	
 	@After
-	public void afterTest() throws InterruptedException {
-		// Thread.sleep(2000);
+	public void afterTest() throws InterruptedException, SQLException, ClassNotFoundException {
+		// Pour la base de données
+				/*ResultSet rs = null;
+				String DRIVER = "org.postgresql.Driver";
+				String JDBC_URL = "jdbc:postgresql://localhost:5432/libreplan";
+				String USER = "postgres";
+				String PASSWORD = "admin";
+				String querySelect = "select * from advance_type";
+				String queryRecupTest1 = "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 1'";
+				String queryRecupTest2 = "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 2'";
+				String queryDelete1 = "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 1'";
+				String queryDelete2 = "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 2'";
+
+				//Load Postgre jdbc driver
+				Class.forName(DRIVER);
+
+				//Create Connection to DB		
+				Connection con = DriverManager.getConnection(JDBC_URL,USER,PASSWORD);
+				System.out.println("Connecté à la base");
+
+				//Create Statement Object		
+				Statement stmt = con.createStatement();
+
+				// Nettoie la base pour 'Test 1'
+				try {		
+					rs= stmt.executeQuery(queryRecupTest1); // Recup 'Test 1'
+
+					if(rs != null) {
+						stmt.executeQuery(queryDelete1);	// Delete 'Test 1'
+						System.out.println("Test1 effacé de la base");
+					}		
+
+				}catch(Exception e) {
+
+				}
+				con.close();*/
+		Thread.sleep(5000);
 		this.driver.quit();
 	}
 }
