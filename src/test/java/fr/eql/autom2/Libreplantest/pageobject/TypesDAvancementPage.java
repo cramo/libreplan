@@ -1,9 +1,5 @@
 package fr.eql.autom2.Libreplantest.pageobject;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,9 +26,30 @@ public class TypesDAvancementPage extends MasterPage{
 
 	@FindBy(xpath="//*[contains(text(),'Sauver et continuer') and @class='z-button-cm']")
 	public WebElement btnSauverContinuer;
+	
+	@FindBy(xpath="//*[contains(text(),'Type avancement - Test 1\" enregistré')]")
+	public WebElement lblConfirmationTest1;
 
 	@FindBy(xpath="//*[contains(text(),'Type avancement - Test 2\" enregistré')]")
 	public WebElement lblConfirmationTest2;
+	
+	@FindBy(xpath="//tr[6]//*[contains(text(),\"Test 1\")]")
+	public WebElement lblNomTest1;
+	
+	@FindBy(xpath="//tr[6]//*[contains(text(),\"Test 2\")]")
+	public WebElement lblTabNomTest2;
+	
+	@FindBy(xpath="//tr[6]/td[2]//*[@type=\"checkbox\"]")
+	public WebElement checkBoxActiveTest1;
+	
+	@FindBy(xpath="//tr[6]/td[3]//*[@type=\"checkbox\"]")
+	public WebElement checkBoxPredefiniTest1;
+	
+	@FindBy(xpath="//tr[6]/td[4]//td[2]//img[@src=\"/libreplan/common/img/ico_editar1.png\"]")
+	public WebElement imgOperationsEditTest1;
+	
+	@FindBy(xpath="//tr[6]/td[4]//td[3]//img")
+	public WebElement imgOperationsDeleteTest1;
 	
 	@FindBy(xpath="//*[contains(text(),\"Modifier Type d'avancement: Type avancement - Test 2\")]")
 	public WebElement lblTitreModif;
@@ -42,9 +59,6 @@ public class TypesDAvancementPage extends MasterPage{
 	
 	@FindBy(xpath="//*[contains(text(),\"Types d'avancement Liste\") and @class=\"z-window-embedded-header\"]")
 	public WebElement lblTitreTypeAvance;
-	
-	@FindBy(xpath="//*[contains(text(),\"Type avancement - Test 2\") and @class=\"z-label\"]")
-	public WebElement lblTabNom;
 	
 	@FindBy(xpath="//tr[6]//span[@class=\"z-checkbox\"]/input[@checked=\"checked\"]")
 	public WebElement lblTabActive;
@@ -70,9 +84,16 @@ public class TypesDAvancementPage extends MasterPage{
 	@FindBy(xpath="//*[contains(text(),\"Opérations\") and @class=\"z-column-cnt\"]")
 	public WebElement headOperations;	
 	
+	@FindBy(xpath="//tr[4]//*[@type=\"text\"]")
+	public WebElement txtPrecision;
+	
+	@FindBy(xpath="//*[contains(text(),\"User\")]")
+	public WebElement lblType;
+	
 	// Label
 	@FindBy(xpath="//*[contains(text(),\"Modifier\") and @class=\"z-tab-text\"]")
 	public WebElement lblModifierTitre;
+	
 	
 
 	// CONSTRUCTEUR
@@ -89,13 +110,19 @@ public class TypesDAvancementPage extends MasterPage{
 		btnCreer.click();
 	}
 
-	public void remplirChampNomUniteValeurMax(String nomUnite, String valeurMax) {
+	public void fillFieldNomUniteValeurMax(String nomUnite, String valeurMax) {
 		// vérifie que l'lément est affiché
 		txtNomUnite.isDisplayed();
 
 		// rempli le champ nom d'unité
 		txtNomUnite.sendKeys(nomUnite);
-
+		
+		// vérifie si le checkbox est affiché
+		chkbActif.isDisplayed();
+		
+		// décoche la case
+		chkbActif.click();
+		
 		// vérifie si le champ valeur max est affiché
 		txtValeurMax.isDisplayed();
 
@@ -106,7 +133,7 @@ public class TypesDAvancementPage extends MasterPage{
 		txtValeurMax.sendKeys(valeurMax);
 	}
 
-	public void remplirChampNomUniteCocherPercentage(String nomUnite) {
+	public void fillFieldNomUniteCheckPercentage(String nomUnite) {
 		// vérifie que l'lément est affiché
 		txtNomUnite.isDisplayed();
 
@@ -117,13 +144,13 @@ public class TypesDAvancementPage extends MasterPage{
 		chkbPourcentage.click();
 	}
 
-	public String recupNomUnite() {
+	public String recoverNomUnite() {
 		// Récupère le texte du champ
 		String recup = txtNomUnite.getText();		
 		return recup;
 	}
 
-	public String recupValeurMax() {
+	public String recoverValeurMax() {
 		// Récupère le texte du champ
 		String recup = txtValeurMax.getText();
 		return recup;
