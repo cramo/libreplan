@@ -88,10 +88,10 @@ public class ProjectTest {
 		// 6ieme pas
 		saveAndCancelButtonVerifications();
 		// 7ieme pas
-		projectDetailPage.getBtnCancel().click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivConfirmCancel().getText())));
-		assertEquals("Confirmer la fenêtre de sortie", projectDetailPage.getDivConfirmCancel().getText());
+		//projectDetailPage.getBtnCancel().click();
+		//wait.until(ExpectedConditions
+		//		.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivConfirmCancel().getText())));
+		//assertEquals("Confirmer la fenêtre de sortie", projectDetailPage.getDivConfirmCancel().getText());
 	}
 
 	private void calendarIsDisplayed() {
@@ -183,10 +183,8 @@ public class ProjectTest {
 		assertEquals(5, i);
 	}
 
-	private void verifyOrderOfHorizontalTabs() {//*[@id="n38Vrv-cave"]
-		List<WebElement> tabs = driver.findElements(By.xpath("//ul/li/div/div/div[contains(@id, 'v-cave')]/span")); // gc-cave
-																													// demo
-																													// v-hm
+	private void verifyOrderOfHorizontalTabs() {// *[@id="n38Vrv-cave"]
+		List<WebElement> tabs = driver.findElements(By.xpath("//span[@class=\"z-tab-text\"]")); //gc-cave // demo// v-hm
 		// ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span
 		// System.out.println("lignes = " + tabs.size());
 		List<String> str = new ArrayList<String>();

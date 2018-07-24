@@ -50,7 +50,7 @@ public class ProjectDetailPage extends MasterPage {
 	private WebElement btnCancelImage;
 	
 	//*[@id="n38Vf4-cap"]
-	private final String divConfirmCancelXPath = "//*[substring(@id, string-length(@id) - string-length('4-cap') +1) = '4-cap']";//4-cap demo 0-cap
+	private final String divConfirmCancelXPath = "//*[substring(@id, string-length(@id) - string-length('0-cap') +1) = '0-cap']";//4-cap demo 0-cap
 	@FindBy(xpath = divConfirmCancelXPath)
 	private WebElement divConfirmCancel;
 	
