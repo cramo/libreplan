@@ -69,7 +69,7 @@ public class ProjectEditor extends MasterPage implements IProjectEditor {
     @FindBy(xpath = btnCancelXPath)
     private WebElement btnCancel;
 
-    public WebElement getInputName() {
+	public WebElement getInputName() {
         return inputName;
     }
 

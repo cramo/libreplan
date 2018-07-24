@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -71,7 +72,7 @@ public class ProjectTest {
 	}
 
 	@Test
-	public void firstTest() throws InterruptedException {
+	public void firstTest(){
 		// 1er pas
 		calendarIsDisplayed();
 		// 2ieme pas
@@ -88,13 +89,40 @@ public class ProjectTest {
 		// 6ieme pas
 		saveAndCancelButtonVerifications();
 		// 7ieme pas
-		projectDetailPage.getBtnCancel().click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivTextCancelXPath())));
-		assertEquals("Confirmer la fenêtre de sortie", projectDetailPage.getDivConfirmCancelBis().getText());
-		assertEquals("Les modifications non enregistrées seront perdues. Êtes-vous sûr ?", projectDetailPage.getDivTextCancel().getText());
-		assertEquals("OK", projectDetailPage.getBtnConfirmOk().getText());
-		assertEquals("Annuler", projectDetailPage.getbtnConfirmCancel().getText());
+		clickAndVerifyCancelPopup();
+		// 8ieme pas
+		projectDetailPage.getBtnConfirmCancel().click();
+		detailProjectPageDisplayed();
+		// 9ieme pas
+		clickAndVerifyCancelPopup();
+		// 10ieme pas
+		projectDetailPage.getBtnConfirmOk().click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(compagnyViewPage.getBtnCreateProjectXPath())));
+		assertEquals(true, compagnyViewPage.getTableProjectPlanification().isDisplayed());
+		assertEquals("Planification des projets", compagnyViewPage.getTableProjectPlanification().getText());
+		boolean bool = horizontalMenuIsNotPresent();
+		assertEquals(true, bool);
+		/*try {
+			WebElement el = driver.findElement(By.xpath("//span[@class=\"z-tab-text\"]"));
+		}
+		catch (java.util.NoSuchElementException | org.openqa.selenium.NoSuchElementException e) {
+			bool = true;
+			assertEquals(true, bool);
+		}*/
+		
+		//boolean bool = horizontalMenuIsNotPresent();
+		//assertEquals(false, bool);
+		//assertEquals("Détail du projet", projectDetailPage.getTableProjectDetail().getText());
+	}
+	
+	private boolean horizontalMenuIsNotPresent() {
+		try {
+			WebElement el = driver.findElement(By.xpath("//span[@class=\"z-tab-text\"]"));
+		}
+		catch (java.util.NoSuchElementException | org.openqa.selenium.NoSuchElementException e) {
+			return true;
+		}
+		return false;
 	}
 
 	private void calendarIsDisplayed() {
@@ -221,6 +249,16 @@ public class ProjectTest {
 		assertEquals("Annuler l'édition", projectDetailPage.getBtnCancel().getAttribute("title"));
 		assertEquals(true, projectDetailPage.getBtnSaveImage().isDisplayed());
 		assertEquals(true, projectDetailPage.getBtnCancelImage().isDisplayed());
+	}
+	
+	private void clickAndVerifyCancelPopup() {
+		projectDetailPage.getBtnCancel().click();
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivTextCancelXPath())));
+		assertEquals("Confirmer la fenêtre de sortie", projectDetailPage.getDivConfirmCancelBis().getText());
+		assertEquals("Les modifications non enregistrées seront perdues. Êtes-vous sûr ?", projectDetailPage.getDivTextCancel().getText());
+		assertEquals("OK", projectDetailPage.getBtnConfirmOk().getText());
+		assertEquals("Annuler", projectDetailPage.getbtnConfirmCancel().getText());
 	}
 
 	@After
