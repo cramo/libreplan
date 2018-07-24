@@ -9,9 +9,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 
-	private final String btnCreateProjectXPath = "//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']";
+	private final String btnCreateProjectXPath = "//*[substring(@id, string-length(@id) - string-length('p3-real') +1) = 'p3-real']";//p3-real demo p3-real
 	@FindBy(xpath = btnCreateProjectXPath)
 	private WebElement btnCreateProject;
+	
+    private final String tableProjectPlanificationXPath = "//*[substring(@id, string-length(@id) - string-length('f4-box') +1) = 'f4-box']/tbody/tr[2]/td[2]";//f4-box demo 14-box
+    @FindBy(xpath = tableProjectPlanificationXPath)
+    private WebElement tableProjectPlanification;
+
+    public String getTableProjectPlanificationXPath() {
+		return tableProjectPlanificationXPath;
+	}
+
+	public WebElement getTableProjectPlanification() {
+		return tableProjectPlanification;
+	}
 
 	private ProjectEditor projectEditor;// = PageFactory.initElements(driver, ProjectEditor.class);
 	
