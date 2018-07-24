@@ -10,6 +10,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -67,23 +68,28 @@ public class ProjectTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.get("http://demo.libreplan.org/libreplan/planner/index.zul");
-		// driver.get("http://localhost:8180/libreplan/");
-		wait = new WebDriverWait(driver, 10);
+		/*System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
+		driver = new ChromeDriver();*/
+		System.setProperty("webdriver.gecko.driver", "C:\\dev\\geckodriver.exe");
+		driver = new FirefoxDriver();
+		//driver.get("http://demo.libreplan.org/libreplan/planner/index.zul");
+		driver.get("http://localhost:8180/libreplan/");
+		wait = new WebDriverWait(driver, 5);
 		LoginPage login = PageFactory.initElements(driver, LoginPage.class);
 		login.remplirChampsLogin("admin", "admin");
 		compagnyViewPage = login.cliquerLogin();
 		// driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		masterPage = PageFactory.initElements(driver, MasterPage.class);
 	}
 
 	@Test
-	public void firstTest(){
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		masterPage = PageFactory.initElements(driver, MasterPage.class);
-		ProjectPage projectPage = masterPage.goToProjectsPage();
+	public void firstTest() throws InterruptedException{
+		//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		
+		//ProjectPage projectPage = masterPage.goToProjectsPage();
 		// 1er pas
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/libreplan/planner/index.zul;orders_list']")));
+		//projectPage = masterPage.goToProjectsPage();
 		calendarIsDisplayed();
 		// 2ieme pas
 		projectEditor = compagnyViewPage.clickCreateProject();
@@ -110,6 +116,10 @@ public class ProjectTest {
 		// 11ieme pas
 		//goToProfilAndVerif();
 		// 12ieme pas
+		//masterPage = PageFactory.initElements(driver, MasterPage.class);
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/libreplan/planner/index.zul;orders_list']")));
+		Thread.sleep(3000);
+		projectPage = masterPage.goToProjectsPage();
 	}
 	
 	private boolean horizontalMenuIsNotPresent() {

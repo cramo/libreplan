@@ -8,7 +8,7 @@ public class ProjectDetailPage extends MasterPage {
 
 	// *[@id="tT7P34-box"]/tbody/tr[2]/td[2]
 	// *[@id="cQ4Q34-box"]/tbody/tr[2]/td[2]
-	private final String tableProjectDetailXPath = "//*[substring(@id, string-length(@id) - string-length('34-box') +1) = '34-box']/tbody/tr[2]/td[2]";//h4-box demo 34-box
+	private final String tableProjectDetailXPath = "//*[substring(@id, string-length(@id) - string-length('h4-box') +1) = 'h4-box']/tbody/tr[2]/td[2]";//h4-box demo 34-box
 	@FindBy(xpath = tableProjectDetailXPath)
 	private WebElement tableProjectDetail;
 

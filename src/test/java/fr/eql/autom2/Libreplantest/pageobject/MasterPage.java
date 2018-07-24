@@ -30,6 +30,8 @@ public class MasterPage {
 	////////////////////////////////////////
 	//////// Onglet CALENDRIER/////////////
 	////////////////////////////////////////
+	//*[substring(@id, string-length(@id) - string-length('7-b') +1) = '7-b']
+	// (//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[1]/descendant::button)[1]
 	@FindBy(xpath="(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[1]/descendant::button)[1]")
 	private WebElement ongletCalendrier;	
 	/**
@@ -39,7 +41,6 @@ public class MasterPage {
 	@FindBy(xpath="//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[1]/descendant::div[@class='submenu z-menu-popup']/ul/li[1]/descendant::a")
 	private WebElement sousmenuVueDeLaCompagnie;
 	//----- Projets -----
-
 	//body//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[1]/descendant::div[@class='submenu z-menu-popup']/ul/li[2]/descendant::a
 	@FindBy(xpath="//a[@href='/libreplan/planner/index.zul;orders_list']")
 	private WebElement sousmenuProjets;
