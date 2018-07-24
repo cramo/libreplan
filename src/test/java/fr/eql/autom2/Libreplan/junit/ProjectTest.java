@@ -88,10 +88,13 @@ public class ProjectTest {
 		// 6ieme pas
 		saveAndCancelButtonVerifications();
 		// 7ieme pas
-		//projectDetailPage.getBtnCancel().click();
-		//wait.until(ExpectedConditions
-		//		.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivConfirmCancel().getText())));
-		//assertEquals("Confirmer la fenêtre de sortie", projectDetailPage.getDivConfirmCancel().getText());
+		projectDetailPage.getBtnCancel().click();
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(projectDetailPage.getDivTextCancelXPath())));
+		assertEquals("Confirmer la fenêtre de sortie", projectDetailPage.getDivConfirmCancelBis().getText());
+		assertEquals("Les modifications non enregistrées seront perdues. Êtes-vous sûr ?", projectDetailPage.getDivTextCancel().getText());
+		assertEquals("OK", projectDetailPage.getBtnConfirmOk().getText());
+		assertEquals("Annuler", projectDetailPage.getbtnConfirmCancel().getText());
 	}
 
 	private void calendarIsDisplayed() {
@@ -205,9 +208,9 @@ public class ProjectTest {
 				i++;
 				// System.out.println("if = " + i);
 			}
-			System.out.println("boucle = " + i);
+			//System.out.println("boucle = " + i);
 		}
-		System.out.println("result = " + i);
+		//System.out.println("result = " + i);
 		assertEquals(9, i);
 	}
 

@@ -49,13 +49,68 @@ public class ProjectDetailPage extends MasterPage {
 	@FindBy(xpath = btnCancelImageXPath)
 	private WebElement btnCancelImage;
 	
+	//div[@class=\"z-window-modal-header z-window-modal-header-move\"]
 	//*[@id="n38Vf4-cap"]
-	private final String divConfirmCancelXPath = "//*[substring(@id, string-length(@id) - string-length('0-cap') +1) = '0-cap']";//4-cap demo 0-cap
+	//div[@class="z-window-modal-hm"]/div/div
+	private final String divConfirmCancelXPath = "//div[@class=\"z-window-modal-hm\"]/div";////div[@class="z-window-modal-header z-window-modal-header-move"]/div demo //div[@class=\"z-window-modal-hm\"]/div
 	@FindBy(xpath = divConfirmCancelXPath)
 	private WebElement divConfirmCancel;
 	
+	private final String divConfirmCancelXPathBis = "//div[@class=\"z-window-modal-hm\"]/div/text()";
+	@FindBy(xpath = divConfirmCancelXPath)
+	private WebElement divConfirmCancelBis;
+
+	private final String divTextCancelXPath = "//div[@class=\"z-window-modal-cl\"]//*[contains(text(),'Les modifications non enregistrées seront perdues. Êtes-vous sûr ?')]";
+	@FindBy(xpath = divTextCancelXPath)
+	private WebElement divTextCancel;
+	
+	//*[@id="uANTn4-box"]/tbody/tr[2]
+	private final String btnConfirmOkXPath = "//div[@class=\"z-window-modal-cl\"]//*[contains(text(),'OK')]";
+	@FindBy(xpath = btnConfirmOkXPath)
+	private WebElement btnConfirmOk;
+	
+	private final String btnConfirmCancelXPath = "//div[@class=\"z-window-modal-cl\"]//*[contains(text(),'Annuler')]";
+	@FindBy(xpath = btnConfirmCancelXPath)
+	private WebElement btnConfirmCancel;
+	
+	public WebElement getDivConfirmCancelBis() {
+		return divConfirmCancelBis;
+	}
+	
+	public String getDivConfirmCancelXPathBis() {
+		return divConfirmCancelXPathBis;
+	}
+
+	public WebElement getBtnConfirmCancel() {
+		return btnConfirmCancel;
+	}
+	
 	public String getBtnSaveXPath() {
 		return btnSaveXPath;
+	}
+
+	public String getDivTextCancelXPath() {
+		return divTextCancelXPath;
+	}
+
+	public WebElement getDivTextCancel() {
+		return divTextCancel;
+	}
+
+	public String getBtnConfirmOkXPath() {
+		return btnConfirmOkXPath;
+	}
+
+	public WebElement getBtnConfirmOk() {
+		return btnConfirmOk;
+	}
+
+	public String getBtnConfirmCancelXPath() {
+		return btnConfirmCancelXPath;
+	}
+
+	public WebElement getbtnConfirmCancel() {
+		return btnConfirmCancel;
 	}
 
 	public String getBtnSaveImageXPath() {
