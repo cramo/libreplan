@@ -174,83 +174,6 @@ public class CreationTypeAvancementTest extends MasterTest {
 		System.out.println("Fin du test");
 	}
 
-
-<<<<<<< HEAD
-//	@After
-//	public void fermetureDuNavigateur() throws ClassNotFoundException, SQLException {	
-//
-//		// Pour la base de données
-//		ResultSet rs = null;
-//		String DRIVER = "org.postgresql.Driver";
-//		String JDBC_URL = "jdbc:postgresql://localhost:5432/libreplan";
-//		String USER = "postgres";
-//		String PASSWORD = "admin";
-//		String querySelect = "select * from advance_type";
-//		String queryRecupTest1 = "SELECT * FROM advance_type WHERE unit_name='Test 1'";
-//		String queryRecupTest2 = "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 2'";
-//		String queryDelete1 = "DELETE FROM advance_type WHERE unit_name='Test 1'";
-//		String queryDelete2 = "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 2'";
-//
-//		//Load Postgre jdbc driver
-//		Class.forName(DRIVER);
-//
-//		//Create Connection to DB		
-//		Connection con = DriverManager.getConnection(JDBC_URL,USER,PASSWORD);
-//		System.out.println("Connecté à la base");
-//
-//		//Create Statement Object		
-//		Statement stmt = con.createStatement();
-//
-//		// Nettoie la base pour 'Test 1'
-//		try {		
-//			rs= stmt.executeQuery(queryRecupTest1); // Recup 'Test 1'
-//
-//			if(rs != null) {
-//				stmt.executeQuery(queryDelete1);	// Delete 'Test 1'
-//				System.out.println("Test1 effacé de la base");
-//			}		
-//
-//		}catch(Exception e) {
-//
-//		}
-//
-//		// Nettoie la base pour 'Test 2'
-//		try {			
-//			rs= stmt.executeQuery(queryRecupTest2); // Recup 'Test 2'
-//
-//			if(rs != null) {
-//				stmt.executeQuery(queryDelete2);	// Delete 'Test 2'
-//				System.out.println("Test2 effacé de la base");
-//			}
-//
-//		}catch(Exception e) {
-//
-//		}
-//		rs= stmt.executeQuery(querySelect);	// Select all rows
-//
-//		// While Loop to iterate through all data and print results		
-//		while (rs.next()){
-//			String id = rs.getString(1);								        
-//			String version = rs.getString(2);	
-//			String unit_name = rs.getString(3);								        
-//			String default_max = rs.getString(4);
-//			String updatable = rs.getString(5);								        
-//			String unit_precision = rs.getString(6);	
-//			String active = rs.getString(7);								        
-//			String percentage = rs.getString(8);
-//			String quality_from = rs.getString(9);								        
-//			String ready_only = rs.getString(10);			
-//
-//			System. out.println(id+"  "+version+" "+unit_name +" "+default_max+" "+updatable+" "+unit_precision+" "+active+" "+percentage+" "+quality_from+" "+ready_only);		
-//		}		
-//		// closing DB Connection		
-//		con.close();
-//		System.out.println("déconnecté de la base");
-//
-//		// Ferme toutes les fenêtres
-//		this.driver.quit();
-//	}
-=======
 	@After
 	public void fermetureDuNavigateur() throws ClassNotFoundException, SQLException {	
 
@@ -325,5 +248,4 @@ public class CreationTypeAvancementTest extends MasterTest {
 		// Ferme toutes les fenêtres
 		this.driver.quit();
 	}
->>>>>>> 82d7ffa022e0cd0d41f9d5733b7228a6aa95f53f
 }

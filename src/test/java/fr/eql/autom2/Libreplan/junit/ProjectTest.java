@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -129,38 +130,66 @@ public class ProjectTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			verifyIcons();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Fin test 1");
 	}
-	
+
 	private void verifyIcons() throws InterruptedException {
+		// Thread.sleep(5000);
+		// projectPage = masterPage.goToProjectsPage();
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id,
+		// string-length(@id) - string-length('i6') +1) =
+		// 'i6']/tr/td/div/table/tbody/tr/td/table/tbody/tr")));
+		// Thread.sleep(2000);
+		// *[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td
 		//Thread.sleep(5000);
-		//projectPage = masterPage.goToProjectsPage();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/table/tbody/tr/td/table/tbody/tr")));
-		//Thread.sleep(2000);
-		//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td
-		List<WebElement> lines = driver
-				.findElements(By.xpath("//*[substring(@id, string-length(@id) - string-length('i7-real') +1) = '7-real']/tbody/tr"));
+		List<WebElement> lines = driver.findElements(By.xpath(
+				"//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/table/tbody/tr/td/table/tbody/tr/td"));
+		List<WebElement> previous = driver.findElements(
+				By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/span"));
 		int i = 0;
 		int result = 0;
 		System.out.println("str = " + data);
 		System.out.println("lignes = " + lines.size());
 		for (WebElement ligne : lines) {
 			System.out.println("une ligne = " + ligne.getText());
-			if (data.get(0).equals(lines.get(i).getText())) {
-				System.out.println("trouvé");
-				result = i;
-				//i = i + 7;
-				int n = 0;
-				assertEquals(lines.get(result).getText(), data.get(n));
-				assertEquals(lines.get(result + 1).getText(), data.get(n + 1));
-				assertEquals(lines.get(result + 2).getText(), data.get(n + 2));
-				assertEquals(lines.get(result + 3).getText(), data.get(n + 3));
-				assertEquals(lines.get(result + 4).getText(), data.get(n + 4));
-				assertEquals(lines.get(result + 5).getText(), data.get(n + 5));
-				assertEquals(lines.get(result + 6).getText(), data.get(n + 6));
-				assertEquals(lines.get(result + 7).getText(), data.get(n + 7));
-				break;
-			}
 			i++;
+			if (i == 3) {
+				//Thread.sleep(1000);
+				ligne.click();
+				//Thread.sleep(2000);
+				//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectPage.getBtnOkXPath())));
+				System.out.println("xhedh");
+				//*[@id="i5GQn5"]
+				WebElement popup = driver.findElement(By.xpath("//*[ @class=\"z-window-modal z-window-modal-shadow\"]"));
+				WebElement boutonOk = driver.findElement(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]"));
+				Actions sup = new Actions(driver);
+				sup.moveToElement(popup)
+						.moveToElement(boutonOk)
+						.click()
+						.build()
+						.perform();
+				break;
+				
+				/*wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]")),
+						ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]"))));
+				WebElement btn = driver.findElement(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]"));
+				assertEquals(true, btn.isDisplayed());
+				btn.click();
+				
+				driver.switchTo().window("Delete");*/
+//				wait.until(//ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectPage.getBtnOkXPath())),
+//						ExpectedConditions.visibilityOfElementLocated(By.xpath(projectPage.getBtnOkXPath())));
+				//assertEquals(true, projectPage.getBtnOk().isDisplayed());
+				//projectPage.getBtnOk().click();
+				
+				//break;
+			}
 		}
 	}
 
@@ -208,9 +237,9 @@ public class ProjectTest {
 
 	private void fillingCreateProjectObject() {
 		Random rand = new Random();
-		int n = rand.nextInt(999999) + 1;
-		projectEditor.setInputName("PROJET_TEST1" + n);
-		data.add(("PROJET_TEST1" + n));
+		//int n = rand.nextInt(999999) + 1;
+		projectEditor.setInputName("PROJET_TEST1" /*+ n*/);
+		data.add(("PROJET_TEST1" /*+ n*/));
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getCheckboxCodeGenerateXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getCheckboxCodeGenerateXPath()))));
@@ -218,8 +247,8 @@ public class ProjectTest {
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getInputCodeXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getInputCodeXPath()))));
-		projectEditor.setInputCode("PRJTEST001" + n);
-		data.add(("PRJTEST001" + n));
+		projectEditor.setInputCode("PRJTEST001" /*+ n*/);
+		data.add(("PRJTEST001" /*+ n*/));
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxBeginXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxBeginXPath()))));
@@ -335,14 +364,15 @@ public class ProjectTest {
 		assertEquals(true, projectPage.getTableListOfProject().isDisplayed());
 		assertEquals("Liste des projets", projectPage.getTableListOfProject().getText());
 	}
-	
+
 	private void verifyProjectInformations() throws InterruptedException {
-		//Thread.sleep(5000);
-		//projectPage = masterPage.goToProjectsPage();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id, string-length(@id) - string-length('45-cave') +1) = '45-cave']")));
-		//Thread.sleep(2000);
-		List<WebElement> lines = driver
-				.findElements(By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/span"));
+		// Thread.sleep(5000);
+		// projectPage = masterPage.goToProjectsPage();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath("//*[substring(@id, string-length(@id) - string-length('45-cave') +1) = '45-cave']")));
+		// Thread.sleep(2000);
+		List<WebElement> lines = driver.findElements(
+				By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/span"));
 		int i = 0;
 		int result = 0;
 		System.out.println("str = " + data);
@@ -352,7 +382,7 @@ public class ProjectTest {
 			if (data.get(0).equals(lines.get(i).getText())) {
 				System.out.println("trouvé");
 				result = i;
-				//i = i + 7;
+				// i = i + 7;
 				int n = 0;
 				assertEquals(lines.get(result).getText(), data.get(n));
 				assertEquals(lines.get(result + 1).getText(), data.get(n + 1));
@@ -402,11 +432,11 @@ public class ProjectTest {
 		 * 
 		 * } con.close();
 		 */
-		
-		//*[@id="kXEPk7-box"]/tbody/tr[2]/td[2]/img
-		//*[@id="jYFPk7-box"]/tbody/tr[2]/td[2]/img
-		
-		//Thread.sleep(5000);
+
+		// *[@id="kXEPk7-box"]/tbody/tr[2]/td[2]/img
+		// *[@id="jYFPk7-box"]/tbody/tr[2]/td[2]/img
+
+		// Thread.sleep(5000);
 		this.driver.quit();
 	}
 }
