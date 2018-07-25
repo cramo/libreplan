@@ -140,14 +140,14 @@ public class MasterPage {
 		return PageFactory.initElements(driver, ParticipantsPage.class);
 	}
 	
-	public CalendriersPage goToCalendriersPage() {
+	public CalendarsPage goToCalendriersPage() {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ongletRessources)
 				.moveToElement(sousmenuCalendriers)
 				.click()
 				.build()
 				.perform();
-		return PageFactory.initElements(driver, CalendriersPage.class);
+		return PageFactory.initElements(driver, CalendarsPage.class);
 	}
 	
 	public ProfilsPage goToProfilsPage() {
@@ -163,14 +163,14 @@ public class MasterPage {
 		return PageFactory.initElements(driver, ProfilsPage.class);
 	}
 	
-	public TypesDAvancementPage goToTypeDAvancementPage() {
+	public AvancementTypePage goToTypeDAvancementPage() {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ongletRessources)
 				.moveToElement(sousmenuTypesDAvancement)
 				.click()
 				.build()
 				.perform();
-		return PageFactory.initElements(driver, TypesDAvancementPage.class);
+		return PageFactory.initElements(driver, AvancementTypePage.class);
 	}
 	
 	public ProjectPage goToProjectsPage() {

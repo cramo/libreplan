@@ -18,13 +18,13 @@ import org.junit.Test;
 import org.openqa.selenium.support.PageFactory;
 
 import fr.eql.autom2.Libreplantest.pageobject.MasterPage;
-import fr.eql.autom2.Libreplantest.pageobject.TypesDAvancementPage;
+import fr.eql.autom2.Libreplantest.pageobject.AvancementTypePage;
 
 public class CreationTypeAvancementTest extends MasterTest {
 
 	Boolean verif;
 	MasterPage menu;
-	TypesDAvancementPage typesDAvancementPage;
+	AvancementTypePage avancementTypePage;
 
 	@Test
 	public void monCreationTypeAvancementTest() throws FileNotFoundException, IOException, InterruptedException {
@@ -42,54 +42,54 @@ public class CreationTypeAvancementTest extends MasterTest {
 		// TODO : Etape 2 - Accéder à la page de gestion des types d'avancement 
 		System.out.println("Etape 2 - Accéder à la page de gestion des types d'avancement ");
 		// Accède à la page Type d'avencement
-		typesDAvancementPage = menu.goToTypeDAvancementPage();	
+		avancementTypePage = menu.goToTypeDAvancementPage();	
 		// Vérification la présence de la colonne Nom
-		assertTrue(typesDAvancementPage.headNom.isDisplayed());
+		assertTrue(avancementTypePage.headNom.isDisplayed());
 		// Vérification la présence de la colonne Active
-		assertTrue(typesDAvancementPage.headActive.isDisplayed());
+		assertTrue(avancementTypePage.headActive.isDisplayed());
 		// Vérification la présence de la colonne Predefini
-		assertTrue(typesDAvancementPage.headPredefini.isDisplayed());
+		assertTrue(avancementTypePage.headPredefini.isDisplayed());
 		// Vérification la présence de la colonne Operations
-		assertTrue(typesDAvancementPage.headOperations.isDisplayed());	
+		assertTrue(avancementTypePage.headOperations.isDisplayed());	
 		// Vérification la présence du bouton créer
-		assertTrue(typesDAvancementPage.btnCreer.isDisplayed());
+		assertTrue(avancementTypePage.btnCreer.isDisplayed());
 
 
 		// TODO : Etape 3 - Créer un type d'avancement - Accès au formulaire de création :
 		System.out.println("Etape 3 - Créer un type d'avancement - Accès au formulaire de création :");	
 		// vérifie si le bouton créer est visible
-		assertEquals("vérifie que le bouton est affiché", true, typesDAvancementPage.btnCreer.isDisplayed()); 
+		assertEquals("vérifie que le bouton est affiché", true, avancementTypePage.btnCreer.isDisplayed()); 
 		// clique sur le bouton Créer
-		typesDAvancementPage.clickOnBtnCreer();
+		avancementTypePage.clickOnBtnCreer();
 
 		// vérifie le titre
-		assertEquals("vérifie le titre", "Modifier",typesDAvancementPage.lblModifierTitre.getText());
+		assertEquals("vérifie le titre", "Modifier",avancementTypePage.lblModifierTitre.getText());
 		// vérifie le Nom d'unité : champ de saisie non renseigné
-		assertEquals("vérifie le champ nom unite","",typesDAvancementPage.txtNomUnite.getText());		
+		assertEquals("vérifie le champ nom unite","",avancementTypePage.txtNomUnite.getText());		
 		// vérifie la Actif : case à cocher cochée par défaut
-		assertEquals("vérifie la case Actif est coché", true,typesDAvancementPage.chkbActif.isSelected());	
+		assertEquals("vérifie la case Actif est coché", true,avancementTypePage.chkbActif.isSelected());	
 
 		// ----- deux vérification non possible à cause du retour null des deux champs ------- //
 		// vérifie la Valeur maximum par défaut : champ de saisie avec pour valeur par défaut "100,00"
-		//System.out.println(typesDAvancementPage.txtValeurMax.getText() + valeur txtValeurMax); // renvoie null
-		//assertEquals("vérifie la Valeur maximum par défaut","100,00",typesDAvancementPage.txtValeurMax.getText());
+		//System.out.println(avancementTypePage.txtValeurMax.getText() + valeur txtValeurMax); // renvoie null
+		//assertEquals("vérifie la Valeur maximum par défaut","100,00",avancementTypePage.txtValeurMax.getText());
 		// vérifie la précision
-		//System.out.println(typesDAvancementPage.txtPrecision.getText() + "valeur txtpecision"); // valeur null
-		//assertEquals("vérifie la précision","Précision",typesDAvancementPage.lblPrecision.getText());
+		//System.out.println(avancementTypePage.txtPrecision.getText() + "valeur txtpecision"); // valeur null
+		//assertEquals("vérifie la précision","Précision",avancementTypePage.lblPrecision.getText());
 
 		// vérifie Type : Valeur non modifiable "User"
 		try {
-			typesDAvancementPage.lblType.sendKeys("color");
+			avancementTypePage.lblType.sendKeys("color");
 		}catch(Exception e) {
 			verif = false;
 		}
 		assertEquals("vérifie le type",false,verif);
 		// Pourcentage : case à cocher décochée par défaut
-		assertEquals("vérifie le pourcentage",false,typesDAvancementPage.chkbPourcentage.isSelected());
+		assertEquals("vérifie le pourcentage",false,avancementTypePage.chkbPourcentage.isSelected());
 		// vérifier les boutons [Enregistrer], [Sauver et continuer] et [Annuler].
-		assertEquals("vérifie la présences du bouton : [Enregistrer]",true,typesDAvancementPage.btnEnregistrer.isDisplayed());
-		assertEquals("vérifie la présences du bouton : [Sauver et continuer]",true,typesDAvancementPage.btnSauverContinuer.isDisplayed());
-		assertEquals("vérifie la présences du bouton : [Annuler]",true,typesDAvancementPage.btnAnnuler.isDisplayed());
+		assertEquals("vérifie la présences du bouton : [Enregistrer]",true,avancementTypePage.btnEnregistrer.isDisplayed());
+		assertEquals("vérifie la présences du bouton : [Sauver et continuer]",true,avancementTypePage.btnSauverContinuer.isDisplayed());
+		assertEquals("vérifie la présences du bouton : [Annuler]",true,avancementTypePage.btnAnnuler.isDisplayed());
 
 
 		// TODO : Etape 4 - Créer un type d'avancement - sans pourcentage :
@@ -98,78 +98,78 @@ public class CreationTypeAvancementTest extends MasterTest {
 		String nomUnite = "Type avancement - Test 1";
 		String valeurMax = "10,00";
 		// Remplie les champs Nom Unite et Valeur Max
-		typesDAvancementPage.fillFieldNomUniteValeurMax(nomUnite,valeurMax);
+		avancementTypePage.fillFieldNomUniteValeurMax(nomUnite,valeurMax);
 		// Clique sur le bouton enregistrer
-		typesDAvancementPage.clickOnEnregistrer();		
+		avancementTypePage.clickOnEnregistrer();		
 		
 		// Le message suivant est affiché : "Type d'avancement "Type avancement - Test 1" enregistré"
 		assertEquals("vérifie le message", "Type d'avancement \"Type avancement - Test 1\" enregistré",
-		typesDAvancementPage.lblConfirmationTest1.getText());
+		avancementTypePage.lblConfirmationTest1.getText());
 		// Nom : Type avancement - Test 1		
-		assertEquals("vérifie le Nom","Type avancement - Test 1",typesDAvancementPage.lblNomTest1.getText());
+		assertEquals("vérifie le Nom","Type avancement - Test 1",avancementTypePage.lblNomTest1.getText());
 		// Activé : Case décochée et non modifiable
-		assertEquals("vérifie l'Activé est décochée",false,typesDAvancementPage.checkBoxActiveTest1.isSelected());
-		assertEquals("vérifie l'Activé est non modifiable",false,typesDAvancementPage.checkBoxActiveTest1.isEnabled());
+		assertEquals("vérifie l'Activé est décochée",false,avancementTypePage.checkBoxActiveTest1.isSelected());
+		assertEquals("vérifie l'Activé est non modifiable",false,avancementTypePage.checkBoxActiveTest1.isEnabled());
 		// Prédéfini : Case décochée et non modifiable
-		assertEquals("vérifie Prédéfini",false,typesDAvancementPage.checkBoxPredefiniTest1.isSelected());
-		assertEquals("vérifie Prédéfini",false,typesDAvancementPage.checkBoxPredefiniTest1.isEnabled());
+		assertEquals("vérifie Prédéfini",false,avancementTypePage.checkBoxPredefiniTest1.isSelected());
+		assertEquals("vérifie Prédéfini",false,avancementTypePage.checkBoxPredefiniTest1.isEnabled());
 		// Opérations : colonne contenant une icône "Modifier" et "Supprimer"
-		assertEquals("vérifie l'icône : Modifier",true,typesDAvancementPage.imgOperationsEditTest1.isDisplayed());
-		assertEquals("vérifie l'icône : Supprimer",true,typesDAvancementPage.imgOperationsDeleteTest1.isDisplayed());
+		assertEquals("vérifie l'icône : Modifier",true,avancementTypePage.imgOperationsEditTest1.isDisplayed());
+		assertEquals("vérifie l'icône : Supprimer",true,avancementTypePage.imgOperationsDeleteTest1.isDisplayed());
 
 
 		// TODO : Etape 5 - Créer un type d'avancement - Accès au formulaire de création :
 		System.out.println("Etape 5 - Créer un type d'avancement - Accès au formulaire de création :");
 		// Vérifie si le bouton créer est visible
-		assertEquals("vérifie que le bouton est affiché", true, typesDAvancementPage.btnCreer.isDisplayed());
+		assertEquals("vérifie que le bouton est affiché", true, avancementTypePage.btnCreer.isDisplayed());
 		// Clique sur le bouton créer
-		typesDAvancementPage.clickOnBtnCreer();
+		avancementTypePage.clickOnBtnCreer();
 
 
 		// TODO : Etape 6 -Créer un type d'avancement - sans pourcentage (1/2) :
 		System.out.println("Etape 6 - Créer un type d'avancement - sans pourcentage (1/2) :");
 		// Remplie le champ Nom Unite et coche la case Pourcentage
-		typesDAvancementPage.fillFieldNomUniteCheckPercentage("Type avancement - Test 2");
+		avancementTypePage.fillFieldNomUniteCheckPercentage("Type avancement - Test 2");
 		// Vérifie que le champ Valuer Max est bien grisé
-		assertFalse(typesDAvancementPage.txtValeurMax.isEnabled());
+		assertFalse(avancementTypePage.txtValeurMax.isEnabled());
 
 
 		// TODO : Etape 7 - Créer un type d'avancement - sans pourcentage (2/2) :
 		System.out.println("Etape 7 - Créer un type d'avancement - sans pourcentage (2/2) :");
 		// Clique sur le bouton Sauver et Continuer
-		typesDAvancementPage.clickOnSauverContinuer();
+		avancementTypePage.clickOnSauverContinuer();
 
 		// Vérifie le message de confirmation 
 		String lblMessage = "Type d'avancement \"Type avancement - Test 2\" enregistré";
-		assertEquals("vérifie message de confirmation",lblMessage,typesDAvancementPage.lblConfirmationTest2.getText());
+		assertEquals("vérifie message de confirmation",lblMessage,avancementTypePage.lblConfirmationTest2.getText());
 		// Vérifie le titre pour la modification
 		String lblTitreModif = "Modifier Type d'avancement: Type avancement - Test 2";
-		assertEquals("Vérifie le titre de la modification",lblTitreModif,typesDAvancementPage.lblTitreModif.getText());
+		assertEquals("Vérifie le titre de la modification",lblTitreModif,avancementTypePage.lblTitreModif.getText());
 
 
 		// TODO : Etape 8 - Retour à la page de gestion des types d'avancement :
 		System.out.println("Etape 8 - Retour à la page de gestion des types d'avancement :");
 		// Cliquer sur le bouton [Annuler]
-		typesDAvancementPage.clickOnAnnuler();
+		avancementTypePage.clickOnAnnuler();
 
 		// Vérifie que nous sommes revenue sur le tableau Types d'avancement Liste
 		String lblTitreType = "Types d'avancement Liste";
-		assertEquals("Vérifie le titre du Type d'avancement",lblTitreType,typesDAvancementPage.lblTitreTypeAvance.getText());
+		assertEquals("Vérifie le titre du Type d'avancement",lblTitreType,avancementTypePage.lblTitreTypeAvance.getText());
 
 
 		// TODO : Etape 9 - Conformité du type d'avancement ajouté :
 		System.out.println("Etape 9 - Conformité du type d'avancement ajouté :");
 		// Vérifie Nom : Type avancement - Test 2
-		assertEquals("Vérifie l'élément : Nom","Type avancement - Test 2",typesDAvancementPage.lblTabNomTest2.getText());
+		assertEquals("Vérifie l'élément : Nom","Type avancement - Test 2",avancementTypePage.lblTabNomTest2.getText());
 		// Vérifie Activé : Case cochée et non modifiable
-		assertEquals("Vérifie l'élément est coché : Activite",true,typesDAvancementPage.lblTabActive.isSelected());
-		assertEquals("Vérifie l'élément est non modifiable : Activite",false,typesDAvancementPage.lblTabActive.isEnabled());
+		assertEquals("Vérifie l'élément est coché : Activite",true,avancementTypePage.lblTabActive.isSelected());
+		assertEquals("Vérifie l'élément est non modifiable : Activite",false,avancementTypePage.lblTabActive.isEnabled());
 		// Prédéfini : Case décochée et non modifiable
-		assertEquals("Vérifie l'élément est non coché : Predefini",false,typesDAvancementPage.lblTabPredefini.isSelected());
-		assertEquals("Vérifie l'élément est non modifiable : Predefini",false,typesDAvancementPage.lblTabPredefini.isEnabled());
+		assertEquals("Vérifie l'élément est non coché : Predefini",false,avancementTypePage.lblTabPredefini.isSelected());
+		assertEquals("Vérifie l'élément est non modifiable : Predefini",false,avancementTypePage.lblTabPredefini.isEnabled());
 		//Opérations : contenant une icône "Modifier" et "Supprimer"
-		assertEquals("Vérifie l'élément est présent : Activite",true,typesDAvancementPage.imgTabModifier.isDisplayed());
-		assertEquals("Vérifie l'élément est présent : Activite",true,typesDAvancementPage.imgTabSuppr.isDisplayed());
+		assertEquals("Vérifie l'élément est présent : Activite",true,avancementTypePage.imgTabModifier.isDisplayed());
+		assertEquals("Vérifie l'élément est présent : Activite",true,avancementTypePage.imgTabSuppr.isDisplayed());
 
 		System.out.println("Fin du test");
 	}

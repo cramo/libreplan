@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import fr.eql.autom2.Libreplantest.pageobject.CreateUnParticipantPage;
+import fr.eql.autom2.Libreplantest.pageobject.CreateAParticipantPage;
 import fr.eql.autom2.Libreplantest.pageobject.MasterPage;
 import fr.eql.autom2.Libreplantest.pageobject.ParticipantsPage;
 
@@ -37,7 +37,7 @@ public class ParticipantTest extends MasterTest{
 		assertTrue("Vérifier si les éléments de page Participants sont présents", participantsPage.checkoutParticipantsPage());
 		
 		// 3 : Créer un participant - accès au formulaire de création
-		CreateUnParticipantPage creerUnParticipantPage = participantsPage.createParticipant();
+		CreateAParticipantPage creerUnParticipantPage = participantsPage.createParticipant();
 		WebElement boutonEnregistrer = driver.findElement(By.xpath(".//span[@class='save-button global-action z-button']/descendant::td[text()=\"Enregistrer\"]"));
 		wait.until(ExpectedConditions.visibilityOf(boutonEnregistrer));
 		assertTrue("Vérifier l'onglet Données personnelles est présent", creerUnParticipantPage.checkoutCreateParticipantPage());

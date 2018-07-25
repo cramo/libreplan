@@ -58,40 +58,40 @@ public class CreateCalendriePage extends MasterPage
 	/**
 	 * Méthodes actions
 	 */
-	public CalendriersPage fillInNameOfCalendar(String nom) {
+	public CalendarsPage fillInNameOfCalendar(String nom) {
 		inputNom.sendKeys(nom);
 		boutonEnregistrer.click();
-		return PageFactory.initElements(driver, CalendriersPage.class);
+		return PageFactory.initElements(driver, CalendarsPage.class);
 	}
 	
-	public CalendriersPage filleInCalendrieDeriveIncorrectly(String nom) {
+	public CalendarsPage filleInCalendrieDeriveIncorrectly(String nom) {
 		inputNom.sendKeys(nom);
 		boutonEnregistrerEtContinuer.click();
-		return PageFactory.initElements(driver, CalendriersPage.class);
+		return PageFactory.initElements(driver, CalendarsPage.class);
 	}
 	
-	public CalendriersPage filleInCalendrieDeriveCorrectly(String nom) {
+	public CalendarsPage filleInCalendrieDeriveCorrectly(String nom) {
 		inputNom.clear();
 		inputNom.sendKeys(nom);
 		boutonEnregistrerEtContinuer.click();
-		return PageFactory.initElements(driver, CalendriersPage.class);
+		return PageFactory.initElements(driver, CalendarsPage.class);
 	}
 	
-	public CalendriersPage clicButtonAnnuler() {
+	public CalendarsPage clicButtonAnnuler() {
 		boutonAnnuler.click();
-		return PageFactory.initElements(driver, CalendriersPage.class);
+		return PageFactory.initElements(driver, CalendarsPage.class);
 	}
 	
-	public CalendriersPage createCalendrieCopyIncorrectly() {
+	public CalendarsPage createCalendrieCopyIncorrectly() {
 		boutonEnregistrer.click();
-		return PageFactory.initElements(driver, CalendriersPage.class);
+		return PageFactory.initElements(driver, CalendarsPage.class);
 	}
 	
-	public CalendriersPage createCalendrieCopyCorrectly(String nom) {
+	public CalendarsPage createCalendrieCopyCorrectly(String nom) {
 		inputNom.clear();
 		inputNom.sendKeys(nom);
 		boutonEnregistrer.click();
-		return PageFactory.initElements(driver, CalendriersPage.class);
+		return PageFactory.initElements(driver, CalendarsPage.class);
 	}
 	
 	// vérifications 

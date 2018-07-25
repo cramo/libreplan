@@ -62,9 +62,9 @@ public class ParticipantsPage extends MasterPage{
 	/**
 	 * Méthode actions
 	 */
-	public CreateUnParticipantPage createParticipant() {
+	public CreateAParticipantPage createParticipant() {
 		boutonCreer.click();
-		return PageFactory.initElements(driver, CreateUnParticipantPage.class);
+		return PageFactory.initElements(driver, CreateAParticipantPage.class);
 	}
 	
 	/**

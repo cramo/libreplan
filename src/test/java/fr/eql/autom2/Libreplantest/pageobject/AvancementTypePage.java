@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class TypesDAvancementPage extends MasterPage{
+public class AvancementTypePage extends MasterPage{
 
 	@FindBy(xpath="//td[contains(text(),\"Créer\")]")
 	public WebElement btnCreer;
@@ -97,7 +97,7 @@ public class TypesDAvancementPage extends MasterPage{
 	
 
 	// CONSTRUCTEUR
-	public TypesDAvancementPage(WebDriver driver) {
+	public AvancementTypePage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}

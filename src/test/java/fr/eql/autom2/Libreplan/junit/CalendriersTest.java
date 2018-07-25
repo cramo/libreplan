@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import fr.eql.autom2.Libreplantest.pageobject.CalendriersPage;
+import fr.eql.autom2.Libreplantest.pageobject.CalendarsPage;
 import fr.eql.autom2.Libreplantest.pageobject.CreateCalendriePage;
 import fr.eql.autom2.Libreplantest.pageobject.MasterPage;
 /**
@@ -37,7 +37,7 @@ public class CalendriersTest extends MasterTest{
 		
 		// 1 : vérifier le page Calendrier
 		MasterPage menu = PageFactory.initElements(driver, MasterPage.class);
-		CalendriersPage calListePage = menu.goToCalendriersPage();
+		CalendarsPage calListePage = menu.goToCalendriersPage();
 		WebElement ongletCalendrier = driver.findElement(By.xpath("(//div[@class='mainmenu z-menubar-hor']/table/tbody/tr/td[1]/descendant::button)[1]"));
 		assertTrue("vérifier la connexion succès", ongletCalendrier.isDisplayed());
 		
@@ -96,6 +96,7 @@ public class CalendriersTest extends MasterTest{
 		// 10 : creer une copie de calendrier
 		calListePage.createUneCopieCalendrie(test1);
 		waitCalPage.until(ExpectedConditions.visibilityOf(titreCreerCalendrier));
+//		valeur du champs par defaut a été utilisé Javascript, je n'ai pas encore trouvé la solution pour y recuperer.
 //		assertTrue("vérifier l'affichage de copie de calendrier Test 1", cal.checkoutCreerCopieCalendrier(test1, "Calendrier source"));
 		
 		

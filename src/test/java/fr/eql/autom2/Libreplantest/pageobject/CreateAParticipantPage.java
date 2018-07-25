@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CreateUnParticipantPage extends MasterPage{
+public class CreateAParticipantPage extends MasterPage{
 
 	@FindBy(xpath=".//span[@class='save-button global-action z-button']/descendant::td[text()=\"Enregistrer\"]")
 	private WebElement boutonEnregistrer;
@@ -48,7 +48,7 @@ public class CreateUnParticipantPage extends MasterPage{
 	@FindBy()
 	private WebElement inputEmailn;
 
-	public CreateUnParticipantPage(WebDriver driver) {
+	public CreateAParticipantPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}

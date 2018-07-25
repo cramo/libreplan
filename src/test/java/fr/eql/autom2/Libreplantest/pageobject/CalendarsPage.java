@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CalendriersPage extends MasterPage 
+public class CalendarsPage extends MasterPage 
 {
 
 	@FindBy(xpath="(.//td[.//text()[contains(., 'Créer')]])[1]")
@@ -23,7 +23,7 @@ public class CalendriersPage extends MasterPage
 	private WebElement HeadOperations;
 	
 
-	public CalendriersPage(WebDriver driver) {
+	public CalendarsPage(WebDriver driver) {
 		super(driver);
 //		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}

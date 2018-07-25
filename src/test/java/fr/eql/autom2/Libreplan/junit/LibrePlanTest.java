@@ -29,7 +29,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import fr.eql.autom2.Libreplantest.pageobject.CalendriersPage;
+import fr.eql.autom2.Libreplantest.pageobject.CalendarsPage;
 import fr.eql.autom2.Libreplantest.pageobject.LoginPage;
 import fr.eql.autom2.Libreplantest.pageobject.MasterPage;
 
