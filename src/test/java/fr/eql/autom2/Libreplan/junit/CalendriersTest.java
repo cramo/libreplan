@@ -1,10 +1,11 @@
 package fr.eql.autom2.Libreplan.junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
 
-import org.dbunit.DefaultPrepAndExpectedTestCase;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.By;
