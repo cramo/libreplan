@@ -64,6 +64,161 @@ public class CreateAParticipantPage extends MasterPage{
 	public Boolean checkoutCreateParticipantPage() {
 		return ongletDonneesPersonnelles.isDisplayed();
 	}
+
+	// getter & setter
+	public WebElement getBoutonEnregistrer() {
+		return boutonEnregistrer;
+	}
+
+	public void setBoutonEnregistrer(WebElement boutonEnregistrer) {
+		this.boutonEnregistrer = boutonEnregistrer;
+	}
+
+	public WebElement getBoutonSauverEtContinuer() {
+		return boutonSauverEtContinuer;
+	}
+
+	public void setBoutonSauverEtContinuer(WebElement boutonSauverEtContinuer) {
+		this.boutonSauverEtContinuer = boutonSauverEtContinuer;
+	}
+
+	public WebElement getBoutonAnnuler() {
+		return boutonAnnuler;
+	}
+
+	public void setBoutonAnnuler(WebElement boutonAnnuler) {
+		this.boutonAnnuler = boutonAnnuler;
+	}
+
+	public WebElement getIframeChampVide() {
+		return iframeChampVide;
+	}
+
+	public void setIframeChampVide(WebElement iframeChampVide) {
+		this.iframeChampVide = iframeChampVide;
+	}
+
+	public WebElement getIframeChampVideBoutonFermer() {
+		return iframeChampVideBoutonFermer;
+	}
+
+	public void setIframeChampVideBoutonFermer(WebElement iframeChampVideBoutonFermer) {
+		this.iframeChampVideBoutonFermer = iframeChampVideBoutonFermer;
+	}
+
+	public WebElement getOngletDonneesPersonnelles() {
+		return ongletDonneesPersonnelles;
+	}
+
+	public void setOngletDonneesPersonnelles(WebElement ongletDonneesPersonnelles) {
+		this.ongletDonneesPersonnelles = ongletDonneesPersonnelles;
+	}
+
+	public WebElement getInputCode() {
+		return inputCode;
+	}
+
+	public void setInputCode(WebElement inputCode) {
+		this.inputCode = inputCode;
+	}
+
+	public WebElement getCheckboxGenererLeCode() {
+		return checkboxGenererLeCode;
+	}
+
+	public void setCheckboxGenererLeCode(WebElement checkboxGenererLeCode) {
+		this.checkboxGenererLeCode = checkboxGenererLeCode;
+	}
+
+	public WebElement getInputPrenom() {
+		return inputPrenom;
+	}
+
+	public void setInputPrenom(WebElement inputPrenom) {
+		this.inputPrenom = inputPrenom;
+	}
+
+	public WebElement getInputNom() {
+		return inputNom;
+	}
+
+	public void setInputNom(WebElement inputNom) {
+		this.inputNom = inputNom;
+	}
+
+	public WebElement getInputId() {
+		return inputId;
+	}
+
+	public void setInputId(WebElement inputId) {
+		this.inputId = inputId;
+	}
+
+	public WebElement getComboboxType() {
+		return comboboxType;
+	}
+
+	public void setComboboxType(WebElement comboboxType) {
+		this.comboboxType = comboboxType;
+	}
+
+	public WebElement getRadioBoutonNonLie() {
+		return radioBoutonNonLie;
+	}
+
+	public void setRadioBoutonNonLie(WebElement radioBoutonNonLie) {
+		this.radioBoutonNonLie = radioBoutonNonLie;
+	}
+
+	public WebElement getRadioBoutonUtilisateurExistant() {
+		return radioBoutonUtilisateurExistant;
+	}
+
+	public void setRadioBoutonUtilisateurExistant(WebElement radioBoutonUtilisateurExistant) {
+		this.radioBoutonUtilisateurExistant = radioBoutonUtilisateurExistant;
+	}
+
+	public WebElement getRadioBoutonCreerUnNouvelUtilisateur() {
+		return radioBoutonCreerUnNouvelUtilisateur;
+	}
+
+	public void setRadioBoutonCreerUnNouvelUtilisateur(WebElement radioBoutonCreerUnNouvelUtilisateur) {
+		this.radioBoutonCreerUnNouvelUtilisateur = radioBoutonCreerUnNouvelUtilisateur;
+	}
+
+	public WebElement getInputNomDUtilisatuer() {
+		return inputNomDUtilisatuer;
+	}
+
+	public void setInputNomDUtilisatuer(WebElement inputNomDUtilisatuer) {
+		this.inputNomDUtilisatuer = inputNomDUtilisatuer;
+	}
+
+	public WebElement getInputMotDePasse() {
+		return inputMotDePasse;
+	}
+
+	public void setInputMotDePasse(WebElement inputMotDePasse) {
+		this.inputMotDePasse = inputMotDePasse;
+	}
+
+	public WebElement getInputConfirmationDuMotDePasse() {
+		return inputConfirmationDuMotDePasse;
+	}
+
+	public void setInputConfirmationDuMotDePasse(WebElement inputConfirmationDuMotDePasse) {
+		this.inputConfirmationDuMotDePasse = inputConfirmationDuMotDePasse;
+	}
+
+	public WebElement getInputEmailn() {
+		return inputEmailn;
+	}
+
+	public void setInputEmailn(WebElement inputEmailn) {
+		this.inputEmailn = inputEmailn;
+	}
+	
+	
 	
 	
 }

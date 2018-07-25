@@ -85,4 +85,122 @@ public class ParticipantsPage extends MasterPage{
 				&& boutonCreer.isDisplayed();
 	}
 	
+	// getter & setter
+	public WebElement getBoutonCreer() {
+		return boutonCreer;
+	}
+	public void setBoutonCreer(WebElement boutonCreer) {
+		this.boutonCreer = boutonCreer;
+	}
+	public WebElement getInputFiltre() {
+		return inputFiltre;
+	}
+	public void setInputFiltre(WebElement inputFiltre) {
+		this.inputFiltre = inputFiltre;
+	}
+	public WebElement getIconFiltre() {
+		return iconFiltre;
+	}
+	public void setIconFiltre(WebElement iconFiltre) {
+		this.iconFiltre = iconFiltre;
+	}
+	public WebElement getInputDetailsPersonnels() {
+		return inputDetailsPersonnels;
+	}
+	public void setInputDetailsPersonnels(WebElement inputDetailsPersonnels) {
+		this.inputDetailsPersonnels = inputDetailsPersonnels;
+	}
+	public WebElement getBoutonPlusDOptions() {
+		return boutonPlusDOptions;
+	}
+	public void setBoutonPlusDOptions(WebElement boutonPlusDOptions) {
+		this.boutonPlusDOptions = boutonPlusDOptions;
+	}
+	public WebElement getBoutonFiltre() {
+		return boutonFiltre;
+	}
+	public void setBoutonFiltre(WebElement boutonFiltre) {
+		this.boutonFiltre = boutonFiltre;
+	}
+	public WebElement getCalPeriodeActiveDepuis() {
+		return calPeriodeActiveDepuis;
+	}
+	public void setCalPeriodeActiveDepuis(WebElement calPeriodeActiveDepuis) {
+		this.calPeriodeActiveDepuis = calPeriodeActiveDepuis;
+	}
+	public WebElement getCalPeriodeA() {
+		return calPeriodeA;
+	}
+	public void setCalPeriodeA(WebElement calPeriodeA) {
+		this.calPeriodeA = calPeriodeA;
+	}
+	public WebElement getComboboxType() {
+		return comboboxType;
+	}
+	public void setComboboxType(WebElement comboboxType) {
+		this.comboboxType = comboboxType;
+	}
+	public WebElement getHeadSurnom() {
+		return headSurnom;
+	}
+	public void setHeadSurnom(WebElement headSurnom) {
+		this.headSurnom = headSurnom;
+	}
+	public WebElement getHeadPrenom() {
+		return headPrenom;
+	}
+	public void setHeadPrenom(WebElement headPrenom) {
+		this.headPrenom = headPrenom;
+	}
+	public WebElement getHeadId() {
+		return headId;
+	}
+	public void setHeadId(WebElement headId) {
+		this.headId = headId;
+	}
+	public WebElement getHeadCode() {
+		return headCode;
+	}
+	public void setHeadCode(WebElement headCode) {
+		this.headCode = headCode;
+	}
+	public WebElement getHeadEnFile() {
+		return headEnFile;
+	}
+	public void setHeadEnFile(WebElement headEnFile) {
+		this.headEnFile = headEnFile;
+	}
+	public WebElement getHeadOperations() {
+		return headOperations;
+	}
+	public void setHeadOperations(WebElement headOperations) {
+		this.headOperations = headOperations;
+	}
+	public WebElement getBoutonSuivant() {
+		return boutonSuivant;
+	}
+	public void setBoutonSuivant(WebElement boutonSuivant) {
+		this.boutonSuivant = boutonSuivant;
+	}
+	public WebElement getBoutonPrecedant() {
+		return boutonPrecedant;
+	}
+	public void setBoutonPrecedant(WebElement boutonPrecedant) {
+		this.boutonPrecedant = boutonPrecedant;
+	}
+	public WebElement getBoutonJusquAuDernierPage() {
+		return boutonJusquAuDernierPage;
+	}
+	public void setBoutonJusquAuDernierPage(WebElement boutonJusquAuDernierPage) {
+		this.boutonJusquAuDernierPage = boutonJusquAuDernierPage;
+	}
+	public WebElement getBoutonJusquAuPermierPage() {
+		return boutonJusquAuPermierPage;
+	}
+	public void setBoutonJusquAuPermierPage(WebElement boutonJusquAuPermierPage) {
+		this.boutonJusquAuPermierPage = boutonJusquAuPermierPage;
+	}
+	
+	
+	
 }

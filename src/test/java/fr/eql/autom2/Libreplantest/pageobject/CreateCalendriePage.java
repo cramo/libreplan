@@ -111,6 +111,119 @@ public class CreateCalendriePage extends MasterPage
 		return inputNom.getAttribute("innerHTML").equals(nom)
 				&& typeCalendrier.getText().equals(type);
 	}
+
+	public WebElement getBoutonEnregistrer() {
+		return boutonEnregistrer;
+	}
+
+	public void setBoutonEnregistrer(WebElement boutonEnregistrer) {
+		this.boutonEnregistrer = boutonEnregistrer;
+	}
+
+	public WebElement getBoutonEnregistrerEtContinuer() {
+		return boutonEnregistrerEtContinuer;
+	}
+
+	public void setBoutonEnregistrerEtContinuer(WebElement boutonEnregistrerEtContinuer) {
+		this.boutonEnregistrerEtContinuer = boutonEnregistrerEtContinuer;
+	}
+
+	public WebElement getBoutonAnnuler() {
+		return boutonAnnuler;
+	}
+
+	public void setBoutonAnnuler(WebElement boutonAnnuler) {
+		this.boutonAnnuler = boutonAnnuler;
+	}
+
+	public WebElement getInputNom() {
+		return inputNom;
+	}
+
+	public void setInputNom(WebElement inputNom) {
+		this.inputNom = inputNom;
+	}
+
+	public WebElement getOngletDonnesDeCalendrier() {
+		return ongletDonnesDeCalendrier;
+	}
+
+	public void setOngletDonnesDeCalendrier(WebElement ongletDonnesDeCalendrier) {
+		this.ongletDonnesDeCalendrier = ongletDonnesDeCalendrier;
+	}
+
+	public WebElement getTypeCalendrier() {
+		return typeCalendrier;
+	}
+
+	public void setTypeCalendrier(WebElement typeCalendrier) {
+		this.typeCalendrier = typeCalendrier;
+	}
+
+	public WebElement getCalDateDeDubut() {
+		return CalDateDeDubut;
+	}
+
+	public void setCalDateDeDubut(WebElement calDateDeDubut) {
+		CalDateDeDubut = calDateDeDubut;
+	}
+
+	public WebElement getCalDateDeFin() {
+		return CalDateDeFin;
+	}
+
+	public void setCalDateDeFin(WebElement calDateDeFin) {
+		CalDateDeFin = calDateDeFin;
+	}
+
+	public WebElement getComboboxEffortNormal1() {
+		return comboboxEffortNormal1;
+	}
+
+	public void setComboboxEffortNormal1(WebElement comboboxEffortNormal1) {
+		this.comboboxEffortNormal1 = comboboxEffortNormal1;
+	}
+
+	public WebElement getComboboxEffortNormal2() {
+		return comboboxEffortNormal2;
+	}
+
+	public void setComboboxEffortNormal2(WebElement comboboxEffortNormal2) {
+		this.comboboxEffortNormal2 = comboboxEffortNormal2;
+	}
+
+	public WebElement getComboboxEffortEnHeuresSupp1() {
+		return comboboxEffortEnHeuresSupp1;
+	}
+
+	public void setComboboxEffortEnHeuresSupp1(WebElement comboboxEffortEnHeuresSupp1) {
+		this.comboboxEffortEnHeuresSupp1 = comboboxEffortEnHeuresSupp1;
+	}
+
+	public WebElement getComboboxEffortEnHeuresSupp2() {
+		return comboboxEffortEnHeuresSupp2;
+	}
+
+	public void setComboboxEffortEnHeuresSupp2(WebElement comboboxEffortEnHeuresSupp2) {
+		this.comboboxEffortEnHeuresSupp2 = comboboxEffortEnHeuresSupp2;
+	}
+
+	public WebElement getRadiobuttonIllimite() {
+		return radiobuttonIllimite;
+	}
+
+	public void setRadiobuttonIllimite(WebElement radiobuttonIllimite) {
+		this.radiobuttonIllimite = radiobuttonIllimite;
+	}
+
+	public WebElement getComboboxTypeDException() {
+		return comboboxTypeDException;
+	}
+
+	public void setComboboxTypeDException(WebElement comboboxTypeDException) {
+		this.comboboxTypeDException = comboboxTypeDException;
+	}
+	
 	
 
 }

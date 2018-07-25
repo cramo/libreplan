@@ -53,4 +53,45 @@ public class CalendarsPage extends MasterPage
 				&& boutonCreer.isDisplayed();
 	}
 
+	public WebElement getBoutonCreer() {
+		return boutonCreer;
+	}
+
+	public void setBoutonCreer(WebElement boutonCreer) {
+		this.boutonCreer = boutonCreer;
+	}
+
+	public WebElement getHeadNom() {
+		return headNom;
+	}
+
+	public void setHeadNom(WebElement headNom) {
+		this.headNom = headNom;
+	}
+
+	public WebElement getHeadHeriteDeLaDate() {
+		return headHeriteDeLaDate;
+	}
+
+	public void setHeadHeriteDeLaDate(WebElement headHeriteDeLaDate) {
+		this.headHeriteDeLaDate = headHeriteDeLaDate;
+	}
+
+	public WebElement getHeadHeritageAJour() {
+		return headHeritageAJour;
+	}
+
+	public void setHeadHeritageAJour(WebElement headHeritageAJour) {
+		this.headHeritageAJour = headHeritageAJour;
+	}
+
+	public WebElement getHeadOperations() {
+		return HeadOperations;
+	}
+
+	public void setHeadOperations(WebElement headOperations) {
+		HeadOperations = headOperations;
+	}
+
+	
 }
