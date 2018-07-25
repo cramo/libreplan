@@ -1,11 +1,9 @@
 package fr.eql.autom2.Libreplantest.pageobject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 
@@ -25,7 +23,7 @@ public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 		return tableProjectPlanification;
 	}
 
-	private ProjectEditor projectEditor;// = PageFactory.initElements(driver, ProjectEditor.class);
+	private ProjectEditor projectEditor;
 	
 	public CompagnyViewPage(WebDriver driver) {
 		super(driver);

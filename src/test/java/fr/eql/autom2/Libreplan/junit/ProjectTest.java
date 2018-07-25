@@ -1,37 +1,34 @@
 package fr.eql.autom2.Libreplan.junit;
 
-import fr.eql.autom2.Libreplantest.pageobject.*;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import fr.eql.autom2.Libreplantest.pageobject.CompagnyViewPage;
+import fr.eql.autom2.Libreplantest.pageobject.LoginPage;
+import fr.eql.autom2.Libreplantest.pageobject.MasterPage;
+import fr.eql.autom2.Libreplantest.pageobject.ProjectDetailPage;
+import fr.eql.autom2.Libreplantest.pageobject.ProjectEditor;
+import fr.eql.autom2.Libreplantest.pageobject.ProjectPage;
+import fr.eql.autom2.Libreplantest.pageobject.State;
 
 public class ProjectTest {
 	private WebDriver driver;
@@ -82,19 +79,12 @@ public class ProjectTest {
 		LoginPage login = PageFactory.initElements(driver, LoginPage.class);
 		login.remplirChampsLogin("admin", "admin");
 		compagnyViewPage = login.cliquerLogin();
-		// driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		masterPage = PageFactory.initElements(driver, MasterPage.class);
 		data = new ArrayList<String>();
 	}
 
 	@Test
 	public void firstTest() {
-		// driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-		// ProjectPage projectPage = masterPage.goToProjectsPage();
-		// 1er pas
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/libreplan/planner/index.zul;orders_list']")));
-		// projectPage = masterPage.goToProjectsPage();
 		calendarIsDisplayed();
 		// 2ieme pas
 		projectEditor = compagnyViewPage.clickCreateProject();
@@ -140,14 +130,6 @@ public class ProjectTest {
 	}
 
 	private void verifyIcons() throws InterruptedException {
-		// Thread.sleep(5000);
-		// projectPage = masterPage.goToProjectsPage();
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[substring(@id,
-		// string-length(@id) - string-length('i6') +1) =
-		// 'i6']/tr/td/div/table/tbody/tr/td/table/tbody/tr")));
-		// Thread.sleep(2000);
-		// *[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td
-		//Thread.sleep(5000);
 		List<WebElement> lines = driver.findElements(By.xpath(
 				"//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/table/tbody/tr/td/table/tbody/tr/td"));
 		List<WebElement> previous = driver.findElements(
@@ -162,11 +144,8 @@ public class ProjectTest {
 			if (i == 3) {
 				//Thread.sleep(1000);
 				ligne.click();
-				//Thread.sleep(2000);
-				//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(projectPage.getBtnOkXPath())));
 				System.out.println("xhedh");
-				//*[@id="i5GQn5"]
-				WebElement popup = driver.findElement(By.xpath("//*[ @class=\"z-window-modal z-window-modal-shadow\"]"));
+				WebElement popup = driver.findElement(By.xpath("//*[@class=\"z-window-modal z-window-modal-shadow\"]"));
 				WebElement boutonOk = driver.findElement(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]"));
 				Actions sup = new Actions(driver);
 				sup.moveToElement(popup)
@@ -175,20 +154,6 @@ public class ProjectTest {
 						.build()
 						.perform();
 				break;
-				
-				/*wait.until(ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]")),
-						ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]"))));
-				WebElement btn = driver.findElement(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]"));
-				assertEquals(true, btn.isDisplayed());
-				btn.click();
-				
-				driver.switchTo().window("Delete");*/
-//				wait.until(//ExpectedConditions.and(ExpectedConditions.elementToBeClickable(By.xpath(projectPage.getBtnOkXPath())),
-//						ExpectedConditions.visibilityOfElementLocated(By.xpath(projectPage.getBtnOkXPath())));
-				//assertEquals(true, projectPage.getBtnOk().isDisplayed());
-				//projectPage.getBtnOk().click();
-				
-				//break;
 			}
 		}
 	}
@@ -237,9 +202,9 @@ public class ProjectTest {
 
 	private void fillingCreateProjectObject() {
 		Random rand = new Random();
-		//int n = rand.nextInt(999999) + 1;
-		projectEditor.setInputName("PROJET_TEST1" /*+ n*/);
-		data.add(("PROJET_TEST1" /*+ n*/));
+		int n = rand.nextInt(999999) + 1;
+		projectEditor.setInputName("PROJET_TEST1" + n);
+		data.add(("PROJET_TEST1" + n));
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getCheckboxCodeGenerateXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getCheckboxCodeGenerateXPath()))));
@@ -247,8 +212,8 @@ public class ProjectTest {
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getInputCodeXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getInputCodeXPath()))));
-		projectEditor.setInputCode("PRJTEST001" /*+ n*/);
-		data.add(("PRJTEST001" /*+ n*/));
+		projectEditor.setInputCode("PRJTEST001" + n);
+		data.add(("PRJTEST001" + n));
 		wait.until(ExpectedConditions.and(
 				ExpectedConditions.elementToBeClickable(By.xpath(projectEditor.getDateboxBeginXPath())),
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(projectEditor.getDateboxBeginXPath()))));
@@ -275,10 +240,7 @@ public class ProjectTest {
 
 	private void verifyOrderOfVerticalTabs() {
 		List<WebElement> tabs = driver.findElements(By.xpath(
-				"//*[substring(@id, string-length(@id) - string-length('r3') +1) = 'r3']/tbody/tr/td/table/tbody/tr/td/span/table/tbody/tr[2]/td[2]"));// r3
-																																						// demo
-																																						// r3
-		// System.out.println("lignes = " + tabs.size());
+				"//*[substring(@id, string-length(@id) - string-length('r3') +1) = 'r3']/tbody/tr/td/table/tbody/tr/td/span/table/tbody/tr[2]/td[2]"));
 		List<String> str = new ArrayList<String>();
 		str.add("Planification de projet");
 		str.add("Détail du projet");
@@ -288,21 +250,16 @@ public class ProjectTest {
 		str.add("test");
 		int i = 0;
 		for (WebElement tab : tabs) {
-			// System.out.println("tab = " + tab.getText());
 			if (tab.getText().equals(str.get(i))) {
 				i++;
-				// System.out.println("if = " + i);
 			}
-			// System.out.println("boucle = " + i);
 		}
-		// System.out.println("result = " + i);
 		assertEquals(5, i);
 	}
 
-	private void verifyOrderOfHorizontalTabs() {// *[@id="n38Vrv-cave"]
+	private void verifyOrderOfHorizontalTabs() {
 		List<WebElement> tabs = driver.findElements(By.xpath("//span[@class=\"z-tab-text\"]")); // gc-cave // demo//
 																								// v-hm
-		// ul/li[9]/div/div/div[contains(@id, 'v-hm')]/span
 		// System.out.println("lignes = " + tabs.size());
 		List<String> str = new ArrayList<String>();
 		str.add("WBS (tâches)");
@@ -366,11 +323,8 @@ public class ProjectTest {
 	}
 
 	private void verifyProjectInformations() throws InterruptedException {
-		// Thread.sleep(5000);
-		// projectPage = masterPage.goToProjectsPage();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[substring(@id, string-length(@id) - string-length('45-cave') +1) = '45-cave']")));
-		// Thread.sleep(2000);
 		List<WebElement> lines = driver.findElements(
 				By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/span"));
 		int i = 0;
@@ -400,43 +354,6 @@ public class ProjectTest {
 
 	@After
 	public void afterTest() throws InterruptedException, SQLException, ClassNotFoundException {
-		// Pour la base de données
-		/*
-		 * ResultSet rs = null; String DRIVER = "org.postgresql.Driver"; String JDBC_URL
-		 * = "jdbc:postgresql://localhost:5432/libreplan"; String USER = "postgres";
-		 * String PASSWORD = "admin"; String querySelect = "select * from advance_type";
-		 * String queryRecupTest1 =
-		 * "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 1'";
-		 * String queryRecupTest2 =
-		 * "SELECT * FROM advance_type WHERE unit_name='Type avancement - Test 2'";
-		 * String queryDelete1 =
-		 * "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 1'"; String
-		 * queryDelete2 =
-		 * "DELETE FROM advance_type WHERE unit_name='Type avancement - Test 2'";
-		 * 
-		 * //Load Postgre jdbc driver Class.forName(DRIVER);
-		 * 
-		 * //Create Connection to DB Connection con =
-		 * DriverManager.getConnection(JDBC_URL,USER,PASSWORD);
-		 * System.out.println("Connecté à la base");
-		 * 
-		 * //Create Statement Object Statement stmt = con.createStatement();
-		 * 
-		 * // Nettoie la base pour 'Test 1' try { rs=
-		 * stmt.executeQuery(queryRecupTest1); // Recup 'Test 1'
-		 * 
-		 * if(rs != null) { stmt.executeQuery(queryDelete1); // Delete 'Test 1'
-		 * System.out.println("Test1 effacé de la base"); }
-		 * 
-		 * }catch(Exception e) {
-		 * 
-		 * } con.close();
-		 */
-
-		// *[@id="kXEPk7-box"]/tbody/tr[2]/td[2]/img
-		// *[@id="jYFPk7-box"]/tbody/tr[2]/td[2]/img
-
-		// Thread.sleep(5000);
 		this.driver.quit();
 	}
 }

@@ -6,13 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class ProjectDetailPage extends MasterPage {
 
-	// *[@id="tT7P34-box"]/tbody/tr[2]/td[2]
-	// *[@id="cQ4Q34-box"]/tbody/tr[2]/td[2]
 	private final String tableProjectDetailXPath = "//*[substring(@id, string-length(@id) - string-length('h4-box') +1) = 'h4-box']/tbody/tr[2]/td[2]";//h4-box demo 34-box
 	@FindBy(xpath = tableProjectDetailXPath)
 	private WebElement tableProjectDetail;
 
-	// *[@id="aS6Qfs-hm"]/span
 	private final String spanMenuWBSXPath = "//*[substring(@id, string-length(@id) - string-length('-hm') +1) = '-hm']/span[.=\"WBS (tâches)\"]";//-hm demo -hm
 	@FindBy(xpath = spanMenuWBSXPath)
 	private WebElement spanMenuWBS;
@@ -22,36 +19,22 @@ public class ProjectDetailPage extends MasterPage {
 	@FindBy(xpath = tableDashboardXPath)
 	private WebElement tableDashboard;
 
-	// *[@id="r43Sdo0-box"]/tbody/tr[2]/td[2]/img
-	// *[@id="xF6Uro0-box"]/tbody/tr[2]/td[2]/img
-
-	// *[@id="xF6Uro0"]
-	// *[substring(@id, string-length(@id) - string-length('o0') +1) =
-	// 'o0']/../span[@title=\"Enregistrer le projet\"]
 	private final String btnSaveXPath = "//span[@title=\"Enregistrer le projet\"]";
 	@FindBy(xpath = btnSaveXPath)
 	private WebElement btnSave;
 
-	// span[@title="Enregistrer le projet"]/table/tbody/tr/td/img
-	// *[@id="xF6Uso0"]
 	private final String btnSaveImageXPath = "//span[@title=\"Enregistrer le projet\"]/table/tbody/tr/td/img";
 	@FindBy(xpath = btnSaveImageXPath)
 	private WebElement btnSaveImage;
 
-	// *[@id="xF6Uso0"]
 	private final String btnCancelXPATH = "//span[@title=\"Annuler l'édition\"]";
 	@FindBy(xpath = btnCancelXPATH)
 	private WebElement btnCancel;
 
-	// span[@title="Enregistrer le projet"]/table/tbody/tr/td/img
-	// *[@id="xF6Uso0"]
 	private final String btnCancelImageXPath = "//span[@title=\"Annuler l'édition\"]/table/tbody/tr/td/img";
 	@FindBy(xpath = btnCancelImageXPath)
 	private WebElement btnCancelImage;
 	
-	//div[@class=\"z-window-modal-header z-window-modal-header-move\"]
-	//*[@id="n38Vf4-cap"]
-	//div[@class="z-window-modal-hm"]/div/div
 	private final String divConfirmCancelXPath = "//div[@class=\"z-window-modal-hm\"]/div";////div[@class="z-window-modal-header z-window-modal-header-move"]/div demo //div[@class=\"z-window-modal-hm\"]/div
 	@FindBy(xpath = divConfirmCancelXPath)
 	private WebElement divConfirmCancel;
@@ -64,7 +47,6 @@ public class ProjectDetailPage extends MasterPage {
 	@FindBy(xpath = divTextCancelXPath)
 	private WebElement divTextCancel;
 	
-	//*[@id="uANTn4-box"]/tbody/tr[2]
 	private final String btnConfirmOkXPath = "//div[@class=\"z-window-modal-cl\"]//*[contains(text(),'OK')]";
 	@FindBy(xpath = btnConfirmOkXPath)
 	private WebElement btnConfirmOk;
