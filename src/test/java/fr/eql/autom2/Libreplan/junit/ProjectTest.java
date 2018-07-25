@@ -45,19 +45,8 @@ public class ProjectTest {
 
 	@Before
 	public void beforeTest() {
-		// ou mettre les wait until, junit ou classes > classes
-		// bonne pratique ou pas de modifier les get set a sa sauce ? > nop
-		// use a builder pour les params ou faire un page object de create un project
-		// entourer le wait d'un if en vérif son boolean et en faisant un else fails()
-		// ?
-		// regarder les url des pages pour voir si ce sont des nouvelles pages > bof
-
-		/*
-		 * System.out.println("innerHTML =" + el.getAttribute("innerHTML"));
-		 * System.out.println("value =" + el.getAttribute("textContent"));
-		 */
-
-		// TODO : Rename classes like the english version of the app
+		// TODO : Rethink the implementation of the interface for create project, save and cancel to avoid duplication of code
+		// TODO : Encapsulate wait methods in page objects 
 
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM geckodriver.exe");
@@ -83,8 +72,10 @@ public class ProjectTest {
 		data = new ArrayList<String>();
 	}
 
+	//PRO-TA-01 Partie 5 premier test
 	@Test
 	public void firstTest() {
+		// 1er pas
 		calendarIsDisplayed();
 		// 2ieme pas
 		projectEditor = compagnyViewPage.clickCreateProject();
@@ -111,51 +102,13 @@ public class ProjectTest {
 		// 11ieme pas
 		goToProfilAndVerif();
 		// 12ieme pas
-		// masterPage = PageFactory.initElements(driver, MasterPage.class);
-		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/libreplan/planner/index.zul;orders_list']")));
-		System.out.println("salut");
 		try {
 			verifyProjectInformations();
+			verifyIconsAndDelete();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			verifyIcons();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("Fin test 1");
-	}
-
-	private void verifyIcons() throws InterruptedException {
-		List<WebElement> lines = driver.findElements(By.xpath(
-				"//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/table/tbody/tr/td/table/tbody/tr/td"));
-		List<WebElement> previous = driver.findElements(
-				By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/span"));
-		int i = 0;
-		int result = 0;
-		System.out.println("str = " + data);
-		System.out.println("lignes = " + lines.size());
-		for (WebElement ligne : lines) {
-			System.out.println("une ligne = " + ligne.getText());
-			i++;
-			if (i == 3) {
-				//Thread.sleep(1000);
-				ligne.click();
-				System.out.println("xhedh");
-				WebElement popup = driver.findElement(By.xpath("//*[@class=\"z-window-modal z-window-modal-shadow\"]"));
-				WebElement boutonOk = driver.findElement(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]"));
-				Actions sup = new Actions(driver);
-				sup.moveToElement(popup)
-						.moveToElement(boutonOk)
-						.click()
-						.build()
-						.perform();
-				break;
-			}
-		}
+		System.out.println("Fin test 5.1");
 	}
 
 	private boolean horizontalMenuIsNotPresent() {
@@ -202,7 +155,7 @@ public class ProjectTest {
 
 	private void fillingCreateProjectObject() {
 		Random rand = new Random();
-		int n = rand.nextInt(999999) + 1;
+		int n = rand.nextInt(9999) + 1;
 		projectEditor.setInputName("PROJET_TEST1" + n);
 		data.add(("PROJET_TEST1" + n));
 		wait.until(ExpectedConditions.and(
@@ -349,6 +302,34 @@ public class ProjectTest {
 				break;
 			}
 			i++;
+		}
+	}
+	
+	private void verifyIconsAndDelete() throws InterruptedException {
+		List<WebElement> lines = driver.findElements(By.xpath(
+				"//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/table/tbody/tr/td/table/tbody/tr/td"));
+		/*List<WebElement> previous = driver.findElements(
+				By.xpath("//*[substring(@id, string-length(@id) - string-length('i6') +1) = 'i6']/tr/td/div/span"));*/
+		int i = 0;
+		System.out.println("str = " + data);
+		System.out.println("lignes = " + lines.size());
+		for (WebElement ligne : lines) {
+			System.out.println("une ligne = " + ligne.getText());
+			i++;
+			if (i == 3) {
+				//Thread.sleep(1000);
+				ligne.click();
+				System.out.println("xhedh");
+				WebElement popup = driver.findElement(By.xpath("//*[@class=\"z-window-modal z-window-modal-shadow\"]"));
+				WebElement boutonOk = driver.findElement(By.xpath("//*[contains(text(), \"OK\") and @class=\"z-button-cm\"]"));
+				Actions sup = new Actions(driver);
+				sup.moveToElement(popup)
+						.moveToElement(boutonOk)
+						.click()
+						.build()
+						.perform();
+				break;
+			}
 		}
 	}
 

@@ -14,6 +14,8 @@ public class CompagnyViewPage extends MasterPage implements IProjectEditor{
     private final String tableProjectPlanificationXPath = "//*[substring(@id, string-length(@id) - string-length('f4-box') +1) = 'f4-box']/tbody/tr[2]/td[2]";//f4-box demo 14-box
     @FindBy(xpath = tableProjectPlanificationXPath)
     private WebElement tableProjectPlanification;
+    
+    private ProjectEditor projectEditor;
 
     public String getTableProjectPlanificationXPath() {
 		return tableProjectPlanificationXPath;
@@ -22,8 +24,6 @@ public class CompagnyViewPage extends MasterPage implements IProjectEditor{
 	public WebElement getTableProjectPlanification() {
 		return tableProjectPlanification;
 	}
-
-	private ProjectEditor projectEditor;
 	
 	public CompagnyViewPage(WebDriver driver) {
 		super(driver);

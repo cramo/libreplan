@@ -14,7 +14,6 @@ public class ProjectDetailPage extends MasterPage {
 	@FindBy(xpath = spanMenuWBSXPath)
 	private WebElement spanMenuWBS;
 
-	// *[@id="h5qDb4-box"]/tbody/tr[2]/td[2]
 	private final String tableDashboardXPath = "//tr[21]/td/span/table/tbody/tr[2]/td[2]";
 	@FindBy(xpath = tableDashboardXPath)
 	private WebElement tableDashboard;
